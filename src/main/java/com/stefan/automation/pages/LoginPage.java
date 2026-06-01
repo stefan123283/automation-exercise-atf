@@ -1,5 +1,6 @@
 package com.stefan.automation.pages;
 
+import com.stefan.automation.utils.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
@@ -32,7 +33,7 @@ public class LoginPage {
 
     private By newsletterCheckbox = By.id("newsletter");
 
-    private By reiceveSpecialOffersCheckbox = By.id("optin");
+    private By receiveSpecialOffersCheckbox = By.id("optin");
 
     //Address Information
 
@@ -61,6 +62,7 @@ public class LoginPage {
     }
 
     public void registerNewUser(String name, String email) {
+        Log.info("Entering the username and email for the new user");
         driver.findElement(nameTextBox).sendKeys(name);
         driver.findElement(signUpEmailTextBox).sendKeys(email);
         driver.findElement(signupButton).click();
@@ -68,6 +70,7 @@ public class LoginPage {
 
     public void enterAccountInformation(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String address1,
                                         String address2, String state, String city, String zipCode, String mobileNumber) {
+        Log.info("Entering the account information");
         driver.findElement(mrCheckbox).click();
         driver.findElement(passwordTextBox).sendKeys(password);
         driver.findElement(selectDaysBox).click();
@@ -78,7 +81,7 @@ public class LoginPage {
         driver.findElement(yearsMonthsBox).sendKeys(year);
         driver.findElement(yearsMonthsBox).sendKeys("\\uE007");
         driver.findElement(newsletterCheckbox).click();
-        driver.findElement(reiceveSpecialOffersCheckbox).click();
+        driver.findElement(receiveSpecialOffersCheckbox).click();
         driver.findElement(firstNameTextBox).sendKeys(firstName);
         driver.findElement(lastNameTextBox).sendKeys(lastName);
         driver.findElement(address1TextBox).sendKeys(address1);

@@ -5,12 +5,14 @@ import com.stefan.automation.pages.AccountCreatedPage;
 import com.stefan.automation.pages.AccountDeletedPage;
 import com.stefan.automation.pages.HomePage;
 import com.stefan.automation.pages.LoginPage;
+import com.stefan.automation.utils.Log;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
     @Test
     public void testValidRegistration() {
+        Log.info("Starting Test Case 1: Register User");
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
         AccountCreatedPage accountCreatedPage = new AccountCreatedPage(driver);
