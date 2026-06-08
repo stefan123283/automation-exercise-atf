@@ -1,31 +1,49 @@
 package com.stefan.automation.pages;
 
 import com.stefan.automation.utils.Log;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class HomePage {
 
     private WebDriver driver;
 
-    private By homeLink = By.xpath("//a[contains(text(), 'Home')]");
+    @FindBy(xpath = "//a[contains(text(), 'Home')]")
+    WebElement homeLink;
 
-    private By loginLink = By.xpath("//a[contains(text(), 'Login')]");
+    @FindBy(xpath = "//a[contains(text(), 'Login')]")
+    WebElement loginLink;
 
-    private By deleteAccountButton = By.xpath("//a[contains(text(), 'Delete Account')]");
+    @FindBy(xpath = "//a[contains(text(), 'Logged in as')]")
+    WebElement loggedInAsUsernameLink;
+
+    @FindBy(xpath = "//a[contains(text(), 'Delete Account')]")
+    WebElement deleteAccountButton;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void navigateToLoginPage() {
-        Log.info("Clicking the [Signup / Login] button from the Home page");
-        driver.findElement(loginLink).click();
+        Log.info("Clicking the [Signup / Login] button from the Home page...");
+        loginLink.click();
     }
 
     public void clickTheDeleteAccountButton() {
-        Log.info("Clicking the [Delete Account] button from the 'Home' page");
-        driver.findElement(deleteAccountButton).click();
+        Log.info("Clicking the [Delete Account] button from the 'Home' page...");
+        deleteAccountButton.click();
+    }
+
+    public void verifyIfHomePageIsDisplayed(){
+        Assert.assertTrue(homeLink.isDisplayed(), "The 'Home' page is not displayed");
+    }
+
+    public void verifyIfLoggedInAsUsernameLinkIsDisplayed(){
+        Assert.assertTrue(loggedInAsUsernameLink.isDisplayed(), "The 'Logged in as username' link is not displayed");
     }
 
 }
