@@ -100,9 +100,9 @@ public class LoginPage {
         Assert.assertTrue(enterAccountInformationHeading.isDisplayed(), "The 'ENTER ACCOUNT INFORMATION' heading is not displayed");
     }
 
-    public void registerNewUser(String name, String email) {
+    public void registerNewUser(String username, String email) {
         Log.info("Entering the username and email for the new user...");
-        nameTextBox.sendKeys(name);
+        nameTextBox.sendKeys(username);
         signUpEmailTextBox.sendKeys(email);
         signupButton.click();
     }
