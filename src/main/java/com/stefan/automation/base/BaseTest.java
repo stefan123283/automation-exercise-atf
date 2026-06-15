@@ -3,6 +3,7 @@ package com.stefan.automation.base;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.stefan.automation.utils.EmailUtils;
 import com.stefan.automation.utils.ExtentReportManager;
 import com.stefan.automation.utils.Log;
 import org.openqa.selenium.WebDriver;
@@ -29,6 +30,9 @@ public class BaseTest {
     @AfterSuite
     public void tearDownReport() {
         extentReports.flush();
+        String reportPath = ExtentReportManager.reportPath;
+        Log.info("The path of the report is: " + reportPath);
+        EmailUtils.sendTestReport(reportPath);
     }
 
     @BeforeMethod

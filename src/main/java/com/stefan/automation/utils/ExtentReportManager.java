@@ -16,12 +16,13 @@ public class ExtentReportManager {
 
     private static ExtentReports extentReports;
     private static ExtentTest extentTest;
+    public static String reportPath;
 
     public static ExtentReports getReportInstance() {
 
         if (extentReports == null) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-            String reportPath = "reports/ExtentReport_" + timestamp + ".html";
+            reportPath = "reports/ExtentReport_" + timestamp + ".html";
             ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(reportPath);
             extentSparkReporter.config().setDocumentTitle("Automation Test Report");
             extentSparkReporter.config().setReportName("Test Execution Report");
