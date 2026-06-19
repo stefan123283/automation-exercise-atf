@@ -1,4 +1,4 @@
-package com.stefan.automation.utils;
+package com.stefan.automation.managers;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -9,7 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class ExcelUtils {
+public class ExcelManager {
 
     private static Workbook workbook;
     private static Sheet sheet;

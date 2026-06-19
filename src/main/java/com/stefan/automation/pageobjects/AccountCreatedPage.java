@@ -1,6 +1,5 @@
-package com.stefan.automation.pages;
+package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.utils.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,7 +26,6 @@ public class AccountCreatedPage {
     }
 
     public void clickTheContinueButton() {
-        Log.info("Clicking the [Continue] button from the 'Account Created' page...");
         continueButton.click();
     }
 }

@@ -1,31 +1,32 @@
-package tests;
+package com.stefan.automation;
 
 import com.stefan.automation.base.BaseTest;
-import com.stefan.automation.pages.AccountCreatedPage;
-import com.stefan.automation.pages.AccountDeletedPage;
-import com.stefan.automation.pages.HomePage;
-import com.stefan.automation.pages.LoginPage;
-import com.stefan.automation.utils.ExcelUtils;
-import com.stefan.automation.utils.ExtentReportManager;
-import com.stefan.automation.utils.Log;
+import com.stefan.automation.managers.FakeDataManager;
+import com.stefan.automation.pageobjects.AccountCreatedPage;
+import com.stefan.automation.pageobjects.AccountDeletedPage;
+import com.stefan.automation.pageobjects.HomePage;
+import com.stefan.automation.pageobjects.LoginPage;
+import com.stefan.automation.managers.ExcelManager;
+import com.stefan.automation.managers.ExtentReportManager;
+import com.stefan.automation.managers.Log;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class LoginTest extends BaseTest {
+public class TestRunner extends BaseTest {
 
     @DataProvider(name = "RegistrationData")
     public Object[][] getRegisterData() throws IOException {
         String filePath = System.getProperty("user.dir") + "/testdata/RegistrationTestData.xlsx";
-        ExcelUtils.loadExcel(filePath, "Sheet1");
-        int rowCount = ExcelUtils.getRowCount();
+        ExcelManager.loadExcel(filePath, "Sheet1");
+        int rowCount = ExcelManager.getRowCount();
         Object[][] data = new Object[rowCount - 1][2];
         for (int i = 1; i < rowCount; i++) {
-            data[i - 1][0] = ExcelUtils.getCellData(i, 0);
-            data[i - 1][1] = ExcelUtils.getCellData(i, 1);
+            data[i - 1][0] = ExcelManager.getCellData(i, 0);
+            data[i - 1][1] = ExcelManager.getCellData(i, 1);
         }
-        ExcelUtils.closeExcel();
+        ExcelManager.closeExcel();
         return data;
     }
 
@@ -48,8 +49,8 @@ public class LoginTest extends BaseTest {
         loginPage.verifyIfEnterAccountInformationHeadingIsDisplayed();
         extentTest.info("Enter the account information");
         Log.info("Entering the account information...");
-        loginPage.enterAccountInformation("Pa$sword!", "30", "J", "2000", "John", "Doe", "ansk3",
-                "sjdn4", "sjd3", "snck2", "skd3", "123");
+        loginPage.enterAccountInformation(FakeDataManager.generateRandomPassword(), FakeDataManager.generateRandomDay(), FakeDataManager.generateRandomMonth(), FakeDataManager.generateRandomYear(),  FakeDataManager.generateRandomFirstName(),  FakeDataManager.generateRandomLastName(),  FakeDataManager.generateRandomCompany(),  FakeDataManager.generateRandomStreetAddress(),
+                FakeDataManager.generateRandomState(), FakeDataManager.generateRandomCity(), FakeDataManager.generateRandomZipCode(), FakeDataManager.generateRandomMobileNumber());
         accountCreatedPage.verifyIfAccountCreatedHeadingIsDisplayed();
         extentTest.info("Click the [Continue] button from the 'Account Created' page");
         Log.info("Clicking the [Continue] button from the 'Account Created' page...");

@@ -1,7 +1,7 @@
 <suite name="LoginSuite">
     <test name="LoginTests">
         <classes>
-            <class name="tests.LoginTest">
+            <class name="com.stefan.automation.TestRunner">
             </class>
         </classes>
     </test>

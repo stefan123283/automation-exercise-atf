@@ -3,11 +3,11 @@ package com.stefan.automation.base;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.stefan.automation.utils.EmailUtils;
-import com.stefan.automation.utils.ExtentReportManager;
-import com.stefan.automation.utils.Log;
+import com.stefan.automation.managers.DriverManager;
+import com.stefan.automation.managers.EmailManager;
+import com.stefan.automation.managers.ExtentReportManager;
+import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -18,27 +18,31 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    protected WebDriver driver = DriverManager.getInstance().getDriver();
     protected static ExtentReports extentReports;
     protected ExtentTest extentTest;
 
     @BeforeSuite
-    public void setupReport() {
+    public void beforeSuite() {
         extentReports = ExtentReportManager.getReportInstance();
     }
 
     @AfterSuite
-    public void tearDownReport() {
+    public void afterSuite() {
         extentReports.flush();
         String reportPath = ExtentReportManager.reportPath;
         Log.info("The path of the report is: " + reportPath);
-        EmailUtils.sendTestReport(reportPath);
+
+        if (driver != null) {
+            Log.info("Closing the WebDriver instance...");
+            driver.quit();
+        }
+
+        EmailManager.sendTestReport(reportPath);
     }
 
     @BeforeMethod
-    public void setUp() {
-        Log.info("Starting the WebDriver instance...");
-        driver = new ChromeDriver();
+    public void beforeMethod() {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Log.info("Navigating to the Automation Exercise website...");
@@ -46,17 +50,13 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void tearDown(ITestResult iTestResult) {
+    public void afterMethod(ITestResult iTestResult) {
 
         if (iTestResult.getStatus() == ITestResult.FAILURE) {
             String screenshotPath = ExtentReportManager.captureScreenshot(driver, iTestResult.getName());
             extentTest.fail("The test has failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         }
 
-        if (driver != null) {
-            Log.info("Closing the WebDriver instance...");
-            driver.quit();
-        }
     }
 
 }

@@ -1,6 +1,6 @@
-package com.stefan.automation.pages;
+package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.utils.Log;
+import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

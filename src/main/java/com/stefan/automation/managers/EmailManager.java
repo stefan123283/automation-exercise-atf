@@ -1,4 +1,4 @@
-package com.stefan.automation.utils;
+package com.stefan.automation.managers;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
@@ -9,7 +9,7 @@ import jakarta.mail.internet.MimeMultipart;
 import java.io.File;
 import java.util.Properties;
 
-public class EmailUtils {
+public class EmailManager {
 
     public static void sendTestReport(String reportPath) {
         final String senderEmail = "frunzas621@gmail.com";

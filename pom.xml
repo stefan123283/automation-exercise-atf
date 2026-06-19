@@ -19,6 +19,7 @@
         <apachecommons.version>2.22.0</apachecommons.version>
         <apachepoi.version>5.5.1</apachepoi.version>
         <jakartamail.version>2.0.2</jakartamail.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
     <dependencies>
@@ -76,6 +77,13 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>jakarta.mail</artifactId>
             <version>${jakartamail.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
         </dependency>
 
     </dependencies>

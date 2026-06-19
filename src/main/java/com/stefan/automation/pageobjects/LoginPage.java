@@ -1,6 +1,6 @@
-package com.stefan.automation.pages;
+package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.utils.Log;
+import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -69,9 +69,6 @@ public class LoginPage {
     @FindBy(id = "address1")
     WebElement address1TextBox;
 
-    @FindBy(id = "address2")
-    WebElement address2TextBox;
-
     @FindBy(id = "state")
     WebElement stateTextBox;
 
@@ -101,14 +98,13 @@ public class LoginPage {
     }
 
     public void registerNewUser(String username, String email) {
-        Log.info("Entering the username and email for the new user...");
         nameTextBox.sendKeys(username);
         signUpEmailTextBox.sendKeys(email);
         signupButton.click();
     }
 
-    public void enterAccountInformation(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String address1,
-                                        String address2, String state, String city, String zipCode, String mobileNumber) {
+    public void enterAccountInformation(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String company, String address1,
+                                        String state, String city, String zipCode, String mobileNumber) {
         Log.info("Entering the account information...");
         mrCheckbox.click();
         passwordTextBox.sendKeys(password);
@@ -123,8 +119,8 @@ public class LoginPage {
         receiveSpecialOffersCheckbox.click();
         firstNameTextBox.sendKeys(firstName);
         lastNameTextBox.sendKeys(lastName);
+        companyTextBox.sendKeys(company);
         address1TextBox.sendKeys(address1);
-        address2TextBox.sendKeys(address2);
         stateTextBox.sendKeys(state);
         cityTextBox.sendKeys(city);
         zipCodeTextBox.sendKeys(zipCode);
