@@ -18,7 +18,7 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    protected WebDriver driver = DriverManager.getInstance().getDriver();
+    protected WebDriver driver;
     protected static ExtentReports extentReports;
     protected ExtentTest extentTest;
 
@@ -43,9 +43,10 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
+        driver = DriverManager.getInstance().getDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Log.info("Navigating to the Automation Exercise website...");
+        Log.info("Navigating to url \"https://automationexercise.com\"...");
         driver.get("https://automationexercise.com");
     }
 
@@ -54,9 +55,13 @@ public class BaseTest {
 
         if (iTestResult.getStatus() == ITestResult.FAILURE) {
             String screenshotPath = ExtentReportManager.captureScreenshot(driver, iTestResult.getName());
-            extentTest.fail("The test has failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            extentTest.fail("The test failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         }
 
-    }
+        if (driver != null) {
+            driver.quit();
+        }
 
+        DriverManager.resetInstance();
+    }
 }

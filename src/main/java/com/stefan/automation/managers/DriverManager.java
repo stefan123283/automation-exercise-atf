@@ -13,18 +13,19 @@ public class DriverManager {
 
     private DriverManager() {
         switch (webDriverType.toUpperCase()) {
-            case "CHROME":
+            case "CHROME" -> {
                 driver = new ChromeDriver();
                 Log.info("Initiating the Chrome driver instance...");
-                break;
-            case "EDGE":
+            }
+            case "EDGE" -> {
                 driver = new EdgeDriver();
                 Log.info("Initiating the Edge driver instance...");
-                break;
-            case "FIREFOX":
+            }
+            case "FIREFOX" -> {
                 driver = new FirefoxDriver();
                 Log.info("Initiating the Firefox driver instance...");
-                break;
+            }
+            default -> Log.warn("Invalid browser name specified!");
         }
     }
 
@@ -40,6 +41,10 @@ public class DriverManager {
             getInstance();
         }
         return driver;
+    }
+
+    public static void resetInstance() {
+        instance = null;
     }
 
 }

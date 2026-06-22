@@ -4,12 +4,13 @@ import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class LoginPage {
+public class LoginPage extends Page{
 
-    private WebDriver driver;
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(xpath = "//h2[text()='New User Signup!']")
     WebElement newUserSignupHeading;
@@ -24,7 +25,7 @@ public class LoginPage {
     WebElement loginButton;
 
     @FindBy(name = "name")
-    WebElement nameTextBox;
+    WebElement usernameTextBox;
 
     @FindBy(xpath = "//input[@data-qa='signup-email']")
     WebElement signUpEmailTextBox;
@@ -84,27 +85,28 @@ public class LoginPage {
     @FindBy(xpath = "//button[text()='Create Account']")
     WebElement createAccountButton;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void verifyIfNewUserSignupHeadingIsDisplayed(){
+    public void verifyIfNewUserSignupHeadingIsDisplayed() {
         Assert.assertTrue(newUserSignupHeading.isDisplayed(), "The 'New User Signup!' heading is not displayed");
     }
 
-    public void verifyIfEnterAccountInformationHeadingIsDisplayed(){
+    public void verifyIfEnterAccountInformationHeadingIsDisplayed() {
         Assert.assertTrue(enterAccountInformationHeading.isDisplayed(), "The 'ENTER ACCOUNT INFORMATION' heading is not displayed");
     }
 
-    public void registerNewUser(String username, String email) {
-        nameTextBox.sendKeys(username);
+    public void enterNewUsername(String username){
+        usernameTextBox.sendKeys(username);
+    }
+
+    public void enterNewEmail(String email){
         signUpEmailTextBox.sendKeys(email);
+    }
+
+    public void clickTheSignupButton(){
         signupButton.click();
     }
 
-    public void enterAccountInformation(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String company, String address1,
-                                        String state, String city, String zipCode, String mobileNumber) {
+    public void populateTheRegistrationForm(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String company, String address1,
+                                            String state, String city, String zipCode, String mobileNumber) {
         Log.info("Entering the account information...");
         mrCheckbox.click();
         passwordTextBox.sendKeys(password);
@@ -125,6 +127,9 @@ public class LoginPage {
         cityTextBox.sendKeys(city);
         zipCodeTextBox.sendKeys(zipCode);
         mobileNumberTextBox.sendKeys(mobileNumber);
+    }
+
+    public void clickTheCreateAccountButton(){
         createAccountButton.click();
     }
 }
