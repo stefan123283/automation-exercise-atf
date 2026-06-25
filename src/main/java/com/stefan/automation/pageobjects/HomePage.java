@@ -4,7 +4,7 @@ import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class HomePage extends Page {
 
@@ -19,7 +19,7 @@ public class HomePage extends Page {
     }
 
     public void verifyIfHomePageIsDisplayed() {
-        Assert.assertTrue(homeLink.isDisplayed(), "The 'Home' page is not displayed");
+        Assertions.assertTrue(homeLink.isDisplayed(), "The \"Home\" page is displayed");
     }
 
     public void navigateToLoginPage() {
@@ -32,7 +32,7 @@ public class HomePage extends Page {
     }
 
     public void verifyIfLoggedInAsUsernameLinkIsDisplayed() {
-        Assert.assertTrue(loggedInAsUsernameLink.isDisplayed(), "The 'Logged in as username' link is not displayed");
+        Assertions.assertTrue(loggedInAsUsernameLink.isDisplayed(), "The \"Logged in as username\" link is displayed");
     }
 
 }

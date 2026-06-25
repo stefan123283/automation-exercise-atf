@@ -1,9 +1,9 @@
 package com.stefan.automation.pageobjects;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 public class AccountCreatedPage extends Page{
 
@@ -15,7 +15,7 @@ public class AccountCreatedPage extends Page{
     WebElement accountCreatedHeading;
 
     public void verifyIfAccountCreatedHeadingIsDisplayed(){
-        Assert.assertTrue(accountCreatedHeading.isDisplayed(), "The 'Account Created!' heading is not displayed");
+        Assertions.assertTrue(accountCreatedHeading.isDisplayed(), "The \"Account Created!\" heading is displayed");
     }
 
     public void clickTheContinueButton() {

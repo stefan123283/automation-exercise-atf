@@ -1,10 +1,10 @@
 package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.Log;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 public class AccountDeletedPage extends Page {
 
@@ -16,7 +16,7 @@ public class AccountDeletedPage extends Page {
     WebElement accountDeletedHeading;
 
     public void verifyIfAccountDeletedHeadingIsDisplayed() {
-        Assert.assertTrue(accountDeletedHeading.isDisplayed(), "The 'Account Deleted!' heading is not displayed");
+        Assertions.assertTrue(accountDeletedHeading.isDisplayed(), "The \"Account Deleted!\" heading is displayed");
     }
 
     public void clickTheContinueButton() {

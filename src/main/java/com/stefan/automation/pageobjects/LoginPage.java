@@ -4,7 +4,7 @@ import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class LoginPage extends Page{
 
@@ -86,11 +86,11 @@ public class LoginPage extends Page{
     WebElement createAccountButton;
 
     public void verifyIfNewUserSignupHeadingIsDisplayed() {
-        Assert.assertTrue(newUserSignupHeading.isDisplayed(), "The 'New User Signup!' heading is not displayed");
+        Assertions.assertTrue(newUserSignupHeading.isDisplayed(), "The \"New User Signup!\" heading is displayed");
     }
 
     public void verifyIfEnterAccountInformationHeadingIsDisplayed() {
-        Assert.assertTrue(enterAccountInformationHeading.isDisplayed(), "The 'ENTER ACCOUNT INFORMATION' heading is not displayed");
+        Assertions.assertTrue(enterAccountInformationHeading.isDisplayed(), "The \"Enter Account Information\" heading is displayed");
     }
 
     public void enterNewUsername(String username){

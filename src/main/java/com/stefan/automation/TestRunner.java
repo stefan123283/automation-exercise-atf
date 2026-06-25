@@ -9,28 +9,36 @@ import com.stefan.automation.pageobjects.LoginPage;
 import com.stefan.automation.managers.ExcelManager;
 import com.stefan.automation.managers.ExtentReportManager;
 import com.stefan.automation.managers.Log;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.Arguments;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class TestRunner extends BaseTest {
 
-    @DataProvider(name = "RegistrationData")
-    public Object[][] getRegisterData() throws IOException {
+    public static Stream<Arguments> getRegisterData() throws IOException {
         String filePath = System.getProperty("user.dir") + "/testdata/RegistrationTestData.xlsx";
         ExcelManager.loadExcel(filePath, "Sheet1");
         int rowCount = ExcelManager.getRowCount();
-        Object[][] data = new Object[rowCount - 1][2];
+
+        List<Arguments> rows = new ArrayList<>();
         for (int i = 1; i < rowCount; i++) {
-            data[i - 1][0] = ExcelManager.getCellData(i, 0);
-            data[i - 1][1] = ExcelManager.getCellData(i, 1);
+            String username = ExcelManager.getCellData(i, 0);
+            String email = ExcelManager.getCellData(i, 1);
+            rows.add(Arguments.of(username, email));
         }
         ExcelManager.closeExcel();
-        return data;
+        return rows.stream();
     }
 
-    @Test(dataProvider = "RegistrationData")
+    @ParameterizedTest()
+    @MethodSource("getRegisterData")
+    @DisplayName("Test Case 1: Register User")
     public void testValidRegistration(String username, String email) {
         extentTest = ExtentReportManager.createTest("Test Case 1: Register User (" + email + ")");
         Log.info("Starting Test Case 1: Register User...");
@@ -60,7 +68,7 @@ public class TestRunner extends BaseTest {
         loginPage.verifyIfEnterAccountInformationHeadingIsDisplayed();
         extentTest.info("Populate the registration form");
         Log.info("Populating the registration form...");
-        loginPage.populateTheRegistrationForm(FakeDataManager.generateRandomPassword(), FakeDataManager.generateRandomDay(), FakeDataManager.generateRandomMonth(), FakeDataManager.generateRandomYear(),  FakeDataManager.generateRandomFirstName(),  FakeDataManager.generateRandomLastName(),  FakeDataManager.generateRandomCompany(),  FakeDataManager.generateRandomStreetAddress(),
+        loginPage.populateTheRegistrationForm(FakeDataManager.generateRandomPassword(), FakeDataManager.generateRandomDay(), FakeDataManager.generateRandomMonth(), FakeDataManager.generateRandomYear(), FakeDataManager.generateRandomFirstName(), FakeDataManager.generateRandomLastName(), FakeDataManager.generateRandomCompany(), FakeDataManager.generateRandomStreetAddress(),
                 FakeDataManager.generateRandomState(), FakeDataManager.generateRandomCity(), FakeDataManager.generateRandomZipCode(), FakeDataManager.generateRandomMobileNumber());
         extentTest.info("Click the [Create Account] button");
         Log.info("Clicking the [Create Account] button...");

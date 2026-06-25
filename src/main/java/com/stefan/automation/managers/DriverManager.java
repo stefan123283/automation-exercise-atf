@@ -43,7 +43,10 @@ public class DriverManager {
         return driver;
     }
 
-    public static void resetInstance() {
+    public void quitTheDriver() {
+        Log.info("Closing the browser and setting the session to null...");
+        driver.quit();
+        driver = null;
         instance = null;
     }
 
