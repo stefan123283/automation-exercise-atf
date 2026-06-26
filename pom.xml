@@ -20,6 +20,7 @@
         <jakartamail.version>2.0.2</jakartamail.version>
         <javafaker.version>1.0.2</javafaker.version>
         <junit.version>6.1.0</junit.version>
+        <cucumber.version>7.34.3</cucumber.version>
     </properties>
 
     <dependencies>
@@ -93,11 +94,32 @@
             <version>${junit.version}</version>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
+        <!-- Source: https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
             <version>${junit.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
 
     </dependencies>

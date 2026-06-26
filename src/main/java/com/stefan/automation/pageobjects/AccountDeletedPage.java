@@ -15,12 +15,12 @@ public class AccountDeletedPage extends Page {
     @FindBy(xpath = "//h2[.='Account Deleted!']")
     WebElement accountDeletedHeading;
 
-    public void verifyIfAccountDeletedHeadingIsDisplayed() {
+    public void verifyAccountDeletedHeadingIsDisplayed() {
         Assertions.assertTrue(accountDeletedHeading.isDisplayed(), "The \"Account Deleted!\" heading is displayed");
     }
 
     public void clickTheContinueButton() {
-        Log.info("Clicking the [Continue] button from the 'Account Deleted' page...");
+        Log.info("Clicking the [Continue] button...");
         continueButton.click();
     }
 }

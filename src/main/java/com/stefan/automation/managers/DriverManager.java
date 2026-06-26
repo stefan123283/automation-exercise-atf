@@ -2,8 +2,11 @@ package com.stefan.automation.managers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverManager {
 
@@ -14,15 +17,21 @@ public class DriverManager {
     private DriverManager() {
         switch (webDriverType.toUpperCase()) {
             case "CHROME" -> {
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--incognito");
+                driver = new ChromeDriver(options);
                 Log.info("Initiating the Chrome driver instance...");
             }
             case "EDGE" -> {
-                driver = new EdgeDriver();
+                EdgeOptions options = new EdgeOptions();
+                options.addArguments("--incognito");
+                driver = new EdgeDriver(options);
                 Log.info("Initiating the Edge driver instance...");
             }
             case "FIREFOX" -> {
-                driver = new FirefoxDriver();
+                FirefoxOptions options = new FirefoxOptions();
+                options.addArguments("--incognito");
+                driver = new FirefoxDriver(options);
                 Log.info("Initiating the Firefox driver instance...");
             }
             default -> Log.warn("Invalid browser name specified!");

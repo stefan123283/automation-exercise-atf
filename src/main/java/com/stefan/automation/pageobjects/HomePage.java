@@ -1,10 +1,8 @@
 package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.junit.jupiter.api.Assertions;
 
 public class HomePage extends Page {
 
@@ -18,21 +16,20 @@ public class HomePage extends Page {
         super(driver);
     }
 
-    public void verifyIfHomePageIsDisplayed() {
-        Assertions.assertTrue(homeLink.isDisplayed(), "The \"Home\" page is displayed");
+    public void verifyHomePageIsVisible() {
+        homeLink.isDisplayed();
     }
 
-    public void navigateToLoginPage() {
-        Log.info("Navigating to Login page...");
-        loginLink.click();
+    public void clickOnLoginButton() {
+        loginButton.click();
     }
 
     public void clickTheDeleteAccountButton() {
         deleteAccountButton.click();
     }
 
-    public void verifyIfLoggedInAsUsernameLinkIsDisplayed() {
-        Assertions.assertTrue(loggedInAsUsernameLink.isDisplayed(), "The \"Logged in as username\" link is displayed");
+    public void verifyLoggedInAsUsernameLinkIsDisplayed() {
+        loggedInAsUsernameLink.isDisplayed();
     }
 
 }

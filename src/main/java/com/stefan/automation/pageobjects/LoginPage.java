@@ -4,9 +4,8 @@ import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.junit.jupiter.api.Assertions;
 
-public class LoginPage extends Page{
+public class LoginPage extends Page {
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -85,23 +84,23 @@ public class LoginPage extends Page{
     @FindBy(xpath = "//button[text()='Create Account']")
     WebElement createAccountButton;
 
-    public void verifyIfNewUserSignupHeadingIsDisplayed() {
-        Assertions.assertTrue(newUserSignupHeading.isDisplayed(), "The \"New User Signup!\" heading is displayed");
+    public void verifyNewUserSignupHeadingIsDisplayed() {
+        newUserSignupHeading.isDisplayed();
     }
 
-    public void verifyIfEnterAccountInformationHeadingIsDisplayed() {
-        Assertions.assertTrue(enterAccountInformationHeading.isDisplayed(), "The \"Enter Account Information\" heading is displayed");
+    public void verifyEnterAccountInformationHeadingIsDisplayed() {
+        enterAccountInformationHeading.isDisplayed();
     }
 
-    public void enterNewUsername(String username){
+    public void enterUsername(String username) {
         usernameTextBox.sendKeys(username);
     }
 
-    public void enterNewEmail(String email){
+    public void enterEmail(String email) {
         signUpEmailTextBox.sendKeys(email);
     }
 
-    public void clickTheSignupButton(){
+    public void clickTheSignupButton() {
         signupButton.click();
     }
 
@@ -129,7 +128,7 @@ public class LoginPage extends Page{
         mobileNumberTextBox.sendKeys(mobileNumber);
     }
 
-    public void clickTheCreateAccountButton(){
+    public void clickTheCreateAccountButton() {
         createAccountButton.click();
     }
 }

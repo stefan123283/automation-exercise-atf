@@ -21,7 +21,7 @@ public abstract class Page {
     WebElement cartLink;
 
     @FindBy(xpath = "//a[contains(text(), 'Login')]")
-    WebElement loginLink;
+    WebElement loginButton;
 
     @FindBy(xpath = "//a[contains(text(), 'Contact us')]")
     WebElement contactUsLink;
