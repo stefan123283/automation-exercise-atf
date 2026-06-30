@@ -7,7 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class Page {
 
+    protected final WebDriver driver;
+
     public Page(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -37,5 +40,13 @@ public abstract class Page {
 
     @FindBy(xpath = "//a[text()='Continue']")
     WebElement continueButton;
+
+    protected void switchToFrame(WebElement frame) {
+        driver.switchTo().frame(frame);
+    }
+
+    protected void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+    }
 
 }

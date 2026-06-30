@@ -27,20 +27,18 @@ public class Hooks {
     @Before
     public void beforeEachTest(Scenario scenario) {
         testCount++;
-        extentTest = ExtentReportManager.createTest( "Test Case: " + scenario.getName() + "_" + testCount);
+        extentTest = ExtentReportManager.createTest("Test Case: " + scenario.getName() + "_" + testCount);
         Log.info("Starting Test Case: " + scenario.getName() + "...");
         driver = DriverManager.getInstance().getDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Log.info("Navigating to url \"https://automationexercise.com\"...");
-        driver.get("https://automationexercise.com");
     }
 
     @After
     public void afterEachTest(Scenario scenario) {
 
         if (scenario.isFailed()) {
-            String screenshotPath = ExtentReportManager.captureScreenshot(driver, scenario.getName() + "_" + testCount);
+            String screenshotPath = ExtentReportManager.captureScreenshot(driver, "Failed_test_case_" + testCount);
             extentTest.fail("The test failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         }
 

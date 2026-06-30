@@ -1,5 +1,6 @@
 package com.stefan.automation.pageobjects;
 
+import com.stefan.automation.managers.ExtentReportManager;
 import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,29 +85,37 @@ public class LoginPage extends Page {
     @FindBy(xpath = "//button[text()='Create Account']")
     WebElement createAccountButton;
 
-    public void verifyNewUserSignupHeadingIsDisplayed() {
+    public void verifyNewUserSignupIsVisible() {
+        Log.info("Verifying that \"New User Signup!\" is visible...");
+        ExtentReportManager.addTestStep("\"New User Signup!\" is visible");
         newUserSignupHeading.isDisplayed();
     }
 
-    public void verifyEnterAccountInformationHeadingIsDisplayed() {
+    public void verifyEnterAccountInformationIsVisible() {
+        Log.info("Verifying that \"Enter Account Information\" is visible...");
+        ExtentReportManager.addTestStep("\"Enter Account Information\" is visible");
         enterAccountInformationHeading.isDisplayed();
     }
 
-    public void enterUsername(String username) {
+    public void populateTheNewUserSignupForm(String username, String email) {
+        Log.info("Entering the \"" + username + "\" username");
+        ExtentReportManager.addTestStep("The \"" + username + "\" username is entered");
         usernameTextBox.sendKeys(username);
-    }
-
-    public void enterEmail(String email) {
+        Log.info("Entering the \"" + email + "\" email");
+        ExtentReportManager.addTestStep("The \"" + email + "\" email is entered");
         signUpEmailTextBox.sendKeys(email);
     }
 
     public void clickTheSignupButton() {
+        Log.info("Clicking the [Signup] button...");
+        ExtentReportManager.addTestStep("The [Signup] button is clicked");
         signupButton.click();
     }
 
-    public void populateTheRegistrationForm(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String company, String address1,
-                                            String state, String city, String zipCode, String mobileNumber) {
-        Log.info("Entering the account information...");
+    public void populateTheAccountInformationForm(String password, String days, String monthFirstLetter, String year, String firstName, String lastName, String company, String address1,
+                                                  String state, String city, String zipCode, String mobileNumber) {
+        Log.info("Populating the Account Information form...");
+        ExtentReportManager.addTestStep("The Account Information form is populated");
         mrCheckbox.click();
         passwordTextBox.sendKeys(password);
         selectDaysBox.click();
@@ -129,6 +138,8 @@ public class LoginPage extends Page {
     }
 
     public void clickTheCreateAccountButton() {
+        Log.info("Clicking the [Create Account] button...");
+        ExtentReportManager.addTestStep("The [Create Account] button is clicked");
         createAccountButton.click();
     }
 }
