@@ -6,77 +6,61 @@ public class FakeDataManager {
 
     private static final Faker faker = new Faker();
 
+    public static String generateRandomUsername() {
+        return faker.name().username();
+    }
+
+    public static String generateRandomEmail() {
+        return faker.internet().emailAddress();
+    }
+
     public static String generateRandomPassword() {
-        String password = faker.internet().password();
-        Log.info("Generated password: " + password);
-        return password;
+        return faker.internet().password();
     }
 
     public static String generateRandomDay() {
-        String day = String.valueOf(faker.number().numberBetween(1, 31));
-        Log.info("Generated day: " + day);
-        return day;
+        return String.valueOf(faker.number().numberBetween(1, 31));
     }
 
     public static String generateRandomMonth() {
         String firstLetterOfTheMonths = "JFMASOND";
-        String month = String.valueOf(firstLetterOfTheMonths.charAt(faker.random().nextInt(firstLetterOfTheMonths.length())));
-        Log.info("Generated month: " + month);
-        return month;
+        return String.valueOf(firstLetterOfTheMonths.charAt(faker.random().nextInt(firstLetterOfTheMonths.length())));
     }
 
     public static String generateRandomYear() {
-        String year = String.valueOf(faker.number().numberBetween(1900, 2021));
-        Log.info("Generated year: " + year);
-        return year;
+        return String.valueOf(faker.number().numberBetween(1900, 2021));
     }
 
     public static String generateRandomFirstName() {
-        String firstName = faker.name().firstName();
-        Log.info("Generated first name: " + firstName);
-        return firstName;
+        return faker.name().firstName();
     }
 
     public static String generateRandomLastName() {
-        String lastName = faker.name().lastName();
-        Log.info("Generated last name: " + lastName);
-        return lastName;
+        return faker.name().lastName();
     }
 
     public static String generateRandomCompany() {
-        String company = faker.company().name();
-        Log.info("Generated company: " + company);
-        return company;
+        return faker.company().name();
     }
 
     public static String generateRandomStreetAddress() {
-        String address = faker.address().streetAddress();
-        Log.info("Generated address: " + address);
-        return address;
+        return faker.address().streetAddress();
     }
 
     public static String generateRandomState() {
-        String state = faker.address().state();
-        Log.info("Generated state: " + state);
-        return state;
+        return faker.address().state();
     }
 
     public static String generateRandomCity() {
-        String city = faker.address().city();
-        Log.info("Generated city: " + city);
-        return city;
+        return faker.address().city();
     }
 
     public static String generateRandomZipCode() {
-        String zipCode = faker.address().zipCode();
-        Log.info("Generated ZIP code: " + zipCode);
-        return zipCode;
+        return faker.address().zipCode();
     }
 
     public static String generateRandomMobileNumber() {
-        String phoneNumber = faker.phoneNumber().phoneNumber();
-        Log.info("Generated phone number: " + phoneNumber);
-        return phoneNumber;
+        return faker.phoneNumber().phoneNumber();
     }
 
 }

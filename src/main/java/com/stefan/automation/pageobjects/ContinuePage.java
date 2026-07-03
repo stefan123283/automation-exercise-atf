@@ -26,21 +26,21 @@ public class ContinuePage extends Page {
     @FindBy(xpath = "//div[text()='Close']")
     WebElement closeAddButton;
 
-    public void verifyAccountCreatedIsVisible() {
-        Log.info("Verifying that \"Account Created!\" is visible...");
-        ExtentReportManager.addTestStep("\"Account Created!\" is visible");
-        accountCreatedHeading.isDisplayed();
+    public void accountIsCreatedSuccessfully() {
+        Log.info("Verifying that account is created successfully...");
+        ExtentReportManager.addTestStep("Account is created successfully");
+        Assertions.assertTrue(accountCreatedHeading.isDisplayed(), "Account is created successfully");
+        userClicksContinueButton();
     }
 
-    public void verifyAccountDeletedIsVisible() {
-        Log.info("Verifying that \"Account Deleted!\" is visible...");
-        ExtentReportManager.addTestStep("\"Account Deleted!\" is visible");
-        Assertions.assertTrue(accountDeletedHeading.isDisplayed(), "The \"Account Deleted!\" heading is displayed");
+    public void accountIsDeletedSuccessfully() {
+        Log.info("Verifying that account is deleted successfully...");
+        ExtentReportManager.addTestStep("Account is deleted successfully");
+        Assertions.assertTrue(accountDeletedHeading.isDisplayed(), "Account is deleted successfully");
     }
 
-    public void clickTheContinueButton() {
-        Log.info("Clicking the [Continue] button...");
-        ExtentReportManager.addTestStep("The [Continue] button is clicked");
+    public void userClicksContinueButton() {
+        Log.info("Clicking [Continue] button...");
         continueButton.click();
         //TODO Add explicit wait
         try {
@@ -51,7 +51,7 @@ public class ContinuePage extends Page {
                 switchToDefaultContent();
             }
         } catch (NoSuchElementException e) {
-            Log.info("The ad is not visible");
+            Log.info("No ads are displayed");
         }
     }
 
