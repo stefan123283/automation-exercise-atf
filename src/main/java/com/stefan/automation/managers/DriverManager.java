@@ -10,31 +10,47 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverManager {
 
-    private static final String webDriverType = ConfigReaderManager.getProperty("browserType");
+    private static final String BROWSER_TYPE = ConfigReaderManager.getProperty("browserType");
+    private static final String INCOGNITO_MODE = ConfigReaderManager.getProperty("incognitoMode");
     private static DriverManager instance;
     private WebDriver driver;
 
     private DriverManager() {
-        switch (webDriverType.toUpperCase()) {
+        switch (BROWSER_TYPE.toUpperCase()) {
             case "CHROME" -> {
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
+                if (INCOGNITO_MODE.equals("enabled")) {
+                    options.addArguments("--incognito");
+                    Log.info("Initiating Chrome driver instance with incognito mode enabled");
+                } else {
+                    Log.info("Initiating Chrome driver instance with incognito mode disabled");
+                }
                 driver = new ChromeDriver(options);
-                Log.info("Initiating the Chrome driver instance...");
             }
             case "EDGE" -> {
                 EdgeOptions options = new EdgeOptions();
-                options.addArguments("--incognito");
+                if (INCOGNITO_MODE.equals("enabled")) {
+                    options.addArguments("--incognito");
+                    Log.info("Initiating Edge driver instance with incognito mode enabled");
+                } else {
+                    Log.info("Initiating Edge driver instance with incognito mode disabled");
+                }
                 driver = new EdgeDriver(options);
-                Log.info("Initiating the Edge driver instance...");
             }
             case "FIREFOX" -> {
                 FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--incognito");
+                if (INCOGNITO_MODE.equals("enabled")) {
+                    options.addArguments("--incognito");
+                    Log.info("Initiating FireFox driver instance with incognito mode enabled");
+                } else {
+                    Log.info("Initiating FireFox driver instance with incognito mode disabled");
+                }
                 driver = new FirefoxDriver(options);
-                Log.info("Initiating the Firefox driver instance...");
             }
-            default -> Log.warn("Invalid browser name specified!");
+            default -> {
+                Log.error("Invalid browser name specified!");
+                throw new IllegalArgumentException("Invalid browser name specified!");
+            }
         }
     }
 
@@ -53,7 +69,7 @@ public class DriverManager {
     }
 
     public void quitTheDriver() {
-        Log.info("Closing the browser and setting the session to null...");
+        Log.info("Closing browser session");
         driver.quit();
         driver = null;
         instance = null;

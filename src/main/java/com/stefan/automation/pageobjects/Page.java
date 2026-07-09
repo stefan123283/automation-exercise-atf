@@ -1,5 +1,7 @@
 package com.stefan.automation.pageobjects;
 
+import com.stefan.automation.managers.ExplicitWaitManager;
+import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,12 +43,37 @@ public abstract class Page {
     @FindBy(xpath = "//a[text()='Continue']")
     WebElement continueButton;
 
-    protected void switchToFrame(WebElement frame) {
+    protected boolean checkIfElementIsVisible(WebElement webElement, String elementName) {
+        ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
+        return webElement.isDisplayed();
+    }
+
+    protected void clickElement(WebElement webElement, String elementName) {
+        ExplicitWaitManager.waitUntilElementIsClickable(webElement, elementName);
+        webElement.click();
+        Log.debug("\"" + elementName + "\" is clicked");
+    }
+
+    protected void sendKeysToElement(WebElement webElement, String elementName, String keys) {
+        checkIfElementIsVisible(webElement, elementName);
+        webElement.sendKeys(keys);
+        Log.debug("Value is entered in the \"" + elementName + "\"");
+    }
+
+    protected void pressEnter(WebElement webElement, String elementName) {
+        webElement.sendKeys("\\uE007");
+        Log.debug("Pressed ENTER on \"" + elementName + "\"");
+    }
+
+    protected void switchToFrame(WebElement frame, String frameName) {
+        checkIfElementIsVisible(frame, frameName);
         driver.switchTo().frame(frame);
+        Log.debug("Switched to \"" + frameName + "\" context");
     }
 
     protected void switchToDefaultContent() {
         driver.switchTo().defaultContent();
+        Log.debug("Switched back to the main page context");
     }
 
 }

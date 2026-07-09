@@ -7,15 +7,16 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMultipart;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 public class EmailManager {
 
-    public static void sendTestReport(String reportPath) {
-        final String senderEmail = "frunzas621@gmail.com";
-        final String appPassword = "pikkggyhdxmbydgr";
-        final String receiverEmail = "frunzas621@gmail.com";
+    private static final String REPORT_SENDER_GMAIL = ConfigReaderManager.getProperty("reportSenderGmail");
+    private static final String REPORT_SENDER_APP_PASSWORD = ConfigReaderManager.getProperty("reportSenderAppPassword");
+    private static final String REPORT_RECEIVER_GMAIL = ConfigReaderManager.getProperty("reportReceiverGmail");
 
+    public static void sendTestReport(String reportPath) {
         // SMTP server properties
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.auth", "true");
@@ -26,7 +27,7 @@ public class EmailManager {
         //Create a session with authentification
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, appPassword);
+                return new PasswordAuthentication(REPORT_SENDER_GMAIL, REPORT_SENDER_APP_PASSWORD);
             }
         });
 //        session.setDebug(true);
@@ -34,8 +35,8 @@ public class EmailManager {
         try {
             // Create Email message
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
+            message.setFrom(new InternetAddress(REPORT_SENDER_GMAIL));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(REPORT_RECEIVER_GMAIL));
             message.setSubject("Automation Exercise Test Execution Report");
 
             // Email Body Part
@@ -53,10 +54,13 @@ public class EmailManager {
             message.setContent(mimeMultipart);
 
             // Send Email
+            Log.debug("Sending test report via email address");
             Transport.send(message);
-            Log.info("Email sent successfully!");
-        } catch (Exception e) {
-            e.printStackTrace();
+            Log.info("Test report sent successfully");
+        } catch (MessagingException e) {
+            Log.warn("Unable to send test report via email");
+        } catch (IOException e) {
+            Log.error("The \"" + reportPath + "\" file was not found or it can't be opened");
         }
     }
 

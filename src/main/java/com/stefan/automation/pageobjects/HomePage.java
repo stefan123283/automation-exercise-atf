@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends Page {
 
+    private static final String APPLICATION_URL = ConfigReaderManager.getProperty("applicationUrl");
+
     @FindBy(xpath = "//a[contains(text(), 'Delete Account')]")
     WebElement deleteAccountButton;
 
@@ -17,27 +19,26 @@ public class HomePage extends Page {
     }
 
     public void userOpensApplication() {
-        String applicationUrl = ConfigReaderManager.getProperty("applicationUrl");
-        Log.info("Accessing the \"" + applicationUrl + "\" url...");
+        Log.info("Opening application URL");
         ExtentReportManager.addTestStep("User opens application");
-        driver.get(applicationUrl);
+        driver.get(APPLICATION_URL);
     }
 
     public void homePageIsVisible() {
-        Log.info("Verifying that Home page is visible...");
-        homeLink.isDisplayed();
+        checkIfElementIsVisible(homeLink, "Home link");
+        Log.info("Home page loaded successfully");
     }
 
     public void userNavigatesToLoginPage() {
-        Log.info("Navigating to Login page...");
+        Log.info("Navigating to Login page");
         ExtentReportManager.addTestStep("User navigates to Login page");
-        loginButton.click();
+        clickElement(loginButton, "[Login] button");
     }
 
     public void userDeletesTheirAccount() {
-        Log.info("Clicking [Delete Account] button...");
+        Log.info("Deleting created account");
         ExtentReportManager.addTestStep("User deletes their account");
-        deleteAccountButton.click();
+        clickElement(deleteAccountButton, "[Delete] button");
     }
 
 }

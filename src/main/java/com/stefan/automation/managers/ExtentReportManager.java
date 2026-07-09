@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ExtentReportManager {
 
@@ -41,21 +42,10 @@ public class ExtentReportManager {
     public static String captureScreenshot(WebDriver driver, String screenshotName) {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-            String reportDir = System.getProperty("user.dir") + "/reports";
-            String screenshotDir = reportDir + "/screenshots";
-
-            File directory = new File(screenshotDir);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-
-            String absolutePath = screenshotDir + "/" + screenshotName + ".png";
-            FileUtils.copyFile(src, new File(absolutePath));
-
+            FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/reports/screenshots/" + screenshotName + ".png"));
             return "screenshots/" + screenshotName + ".png";
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            Log.warn("Screenshoot was not saved!");
             return null;
         }
     }

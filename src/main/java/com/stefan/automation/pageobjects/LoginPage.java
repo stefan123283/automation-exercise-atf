@@ -33,14 +33,11 @@ public class LoginPage extends Page {
 
     public void userCompletesSignupForm() {
         ExtentReportManager.addTestStep("User completes signup form");
-        String username = FakeDataManager.generateRandomUsername();
-        Log.info("Entering \"" + username + "\" value in the \"Name\" field");
-        usernameTextBox.sendKeys(username);
-        String email = FakeDataManager.generateRandomEmail();
-        Log.info("Entering \"" + email + "\" value in the \"Email Address\" field");
-        signUpEmailTextBox.sendKeys(email);
-        Log.info("Clicking [Signup] button...");
-        signupButton.click();
+        Log.info("Completing signup form");
+        sendKeysToElement(usernameTextBox, "Username text box", FakeDataManager.generateRandomUsername());
+        sendKeysToElement(signUpEmailTextBox, "Signup email text box", FakeDataManager.generateRandomEmail());
+        clickElement(signupButton, "[Signup] button");
+        Log.info("Signup form completed");
     }
 
 }

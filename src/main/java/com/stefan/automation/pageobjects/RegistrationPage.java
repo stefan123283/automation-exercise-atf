@@ -26,7 +26,7 @@ public class RegistrationPage extends Page {
     WebElement selectMonthsBox;
 
     @FindBy(id = "years")
-    WebElement yearsMonthsBox;
+    WebElement selectYearsBox;
 
     @FindBy(id = "newsletter")
     WebElement newsletterCheckbox;
@@ -62,56 +62,29 @@ public class RegistrationPage extends Page {
     WebElement createAccountButton;
 
     public void userCompletesRegistrationForm() {
-        Log.info("Completing registration form...");
+        Log.info("Completing registration form");
         ExtentReportManager.addTestStep("User completes registration form");
-        Log.info("Checking the \"Mr.\" checkbox...");
-        mrCheckbox.click();
-        String password = FakeDataManager.generateRandomPassword();
-        Log.info("Entering the \"" + password + "\" value in the \"Password\" field");
-        passwordTextBox.sendKeys(password);
-        String days = FakeDataManager.generateRandomDay();
-        Log.info("Selecting the \"" + days + "\" value as the value of the \"Day\" field");
-        selectDaysBox.click();
-        selectDaysBox.sendKeys(days);
-        selectDaysBox.sendKeys("\\uE007");
-        String monthFirstLetter = FakeDataManager.generateRandomMonth();
-        Log.info("Entering the \"" + monthFirstLetter + "\" value in the \"Month\" field");
-        selectMonthsBox.sendKeys(monthFirstLetter);
-        selectMonthsBox.sendKeys("\\uE007");
-        String year = FakeDataManager.generateRandomYear();
-        Log.info("Entering the \"" + year + "\" value in the \"Year\" field");
-        yearsMonthsBox.sendKeys(year);
-        yearsMonthsBox.sendKeys("\\uE007");
-        Log.info("Checking the \"Sign up for our newsletter!\" checkbox...");
-        newsletterCheckbox.click();
-        Log.info("Checking the \"Receive special offers from our partners!\" checkbox...");
-        receiveSpecialOffersCheckbox.click();
-        String firstName = FakeDataManager.generateRandomFirstName();
-        Log.info("Entering the \"" + firstName + "\" value in the \"First name\" field");
-        firstNameTextBox.sendKeys(firstName);
-        String lastName = FakeDataManager.generateRandomLastName();
-        Log.info("Entering the \"" + lastName + "\" value in the \"Last name\" field");
-        lastNameTextBox.sendKeys(lastName);
-        String company = FakeDataManager.generateRandomCompany();
-        Log.info("Entering the \"" + company + "\" value in the \"Company\" field");
-        companyTextBox.sendKeys(company);
-        String address = FakeDataManager.generateRandomStreetAddress();
-        Log.info("Entering the \"" + address + "\" value in the \"Address\" field");
-        addressTextBox.sendKeys(address);
-        String state = FakeDataManager.generateRandomState();
-        Log.info("Entering the \"" + state + "\" value in the \"State\" field");
-        stateTextBox.sendKeys(state);
-        String city = FakeDataManager.generateRandomCity();
-        Log.info("Entering the \"" + city + "\" value in the \"City\" field");
-        cityTextBox.sendKeys(city);
-        String zipCode = FakeDataManager.generateRandomZipCode();
-        Log.info("Entering the \"" + zipCode + "\" value in the \"Zipcode\" field");
-        zipCodeTextBox.sendKeys(zipCode);
-        String mobileNumber = FakeDataManager.generateRandomMobileNumber();
-        Log.info("Entering the \"" + mobileNumber + "\" value in the \"Mobile Number\" field");
-        mobileNumberTextBox.sendKeys(mobileNumber);
-        Log.info("Clicking [Create Account] button...");
-        createAccountButton.click();
+        clickElement(mrCheckbox, "Mr. checkbox");
+        sendKeysToElement(passwordTextBox, "Password text box", FakeDataManager.generateRandomPassword());
+        clickElement(selectDaysBox, "Select days box");
+        sendKeysToElement(selectDaysBox, "Select days box", FakeDataManager.generateRandomDay());
+        pressEnter(selectDaysBox, "Select days box");
+        sendKeysToElement(selectMonthsBox, "Select months box", FakeDataManager.generateRandomMonth());
+        pressEnter(selectMonthsBox, "Select months box");
+        sendKeysToElement(selectYearsBox, "Select years box", FakeDataManager.generateRandomYear());
+        pressEnter(selectYearsBox, "Select years box");
+        clickElement(newsletterCheckbox, "Newsletter checkbox");
+        clickElement(receiveSpecialOffersCheckbox, "Receive special offers checkbox");
+        sendKeysToElement(firstNameTextBox, "First name text box", FakeDataManager.generateRandomFirstName());
+        sendKeysToElement(lastNameTextBox, "Last name text box", FakeDataManager.generateRandomLastName());
+        sendKeysToElement(companyTextBox, "Company text box", FakeDataManager.generateRandomCompany());
+        sendKeysToElement(addressTextBox, "Address text box", FakeDataManager.generateRandomStreetAddress());
+        sendKeysToElement(stateTextBox, "State text box", FakeDataManager.generateRandomState());
+        sendKeysToElement(cityTextBox, "City text box", FakeDataManager.generateRandomCity());
+        sendKeysToElement(zipCodeTextBox, "Zipcode text box", FakeDataManager.generateRandomZipCode());
+        sendKeysToElement(mobileNumberTextBox, "Mobile Number text box", FakeDataManager.generateRandomMobileNumber());
+        clickElement(createAccountButton, "[Create Account] button");
+        Log.info("Registration form completed");
     }
 
 
