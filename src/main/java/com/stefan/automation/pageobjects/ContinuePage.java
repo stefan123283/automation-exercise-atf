@@ -1,7 +1,6 @@
 package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.AssertManager;
-import com.stefan.automation.managers.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,25 +26,24 @@ public class ContinuePage extends Page {
     List<WebElement> adsFrame;
 
     public void accountIsCreatedSuccessfully() {
-        AssertManager.assertTrue(checkIfElementIsVisible(accountCreatedHeading, "Account Created heading"), "Account is created successfully");
-        Log.info("Account created successfully");
-        userClicksContinueButton();
+        AssertManager.assertTrue(checkIfElementIsVisible(accountCreatedHeading, "Account Created heading"), "Account created successfully");
+        clickElement(continueButton, "[Continue] button");
+        closePopUpAddIfPresent();
     }
 
     public void accountIsDeletedSuccessfully() {
-        AssertManager.assertTrue(checkIfElementIsVisible(accountDeletedHeading, "Account Deleted heading"), "Account is deleted successfully");
-        Log.info("Account deleted successfully");
+        AssertManager.assertTrue(checkIfElementIsVisible(accountDeletedHeading, "Account Deleted heading"), "Account deleted successfully");
+        clickElement(continueButton, "[Continue] button");
+        closePopUpAddIfPresent();
     }
 
-    public void userClicksContinueButton() {
-        clickElement(continueButton, "[Continue] button");
+    public void closePopUpAddIfPresent() {
         adsFrame = driver.findElements(By.id("aswift_2"));
         if (!adsFrame.isEmpty()) {
             switchToFrame(adsFrame.getFirst(), "Advertisements frame");
             clickElement(closeAddButton, "[Close add] button");
             switchToDefaultContent();
         }
-
     }
 
 }

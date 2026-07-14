@@ -1,18 +1,14 @@
 package com.stefan.automation.pageobjects;
 
+import com.stefan.automation.managers.AssertManager;
 import com.stefan.automation.managers.ConfigReaderManager;
 import com.stefan.automation.managers.ExtentReportManager;
 import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends Page {
 
     private static final String APPLICATION_URL = ConfigReaderManager.getProperty("applicationUrl");
-
-    @FindBy(xpath = "//a[contains(text(), 'Delete Account')]")
-    WebElement deleteAccountButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -39,6 +35,16 @@ public class HomePage extends Page {
         Log.info("Deleting created account");
         ExtentReportManager.addTestStep("User deletes their account");
         clickElement(deleteAccountButton, "[Delete] button");
+    }
+
+    public void userLogsOut() {
+        Log.info("Logging out");
+        ExtentReportManager.addTestStep("User logs out");
+        clickElement(logoutButton, "[Logout] button");
+    }
+
+    public void userIsLoggedInSuccessfully() {
+        AssertManager.assertTrue(checkIfElementIsVisible(loggedInAsUserLink, "Logged in as user link"), "User is logged in successfully");
     }
 
 }

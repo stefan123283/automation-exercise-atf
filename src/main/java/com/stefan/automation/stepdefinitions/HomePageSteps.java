@@ -2,7 +2,9 @@ package com.stefan.automation.stepdefinitions;
 
 import com.stefan.automation.managers.DriverManager;
 import com.stefan.automation.pageobjects.HomePage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
@@ -25,6 +27,16 @@ public class HomePageSteps {
     @When("User deletes their account")
     public void userDeletesTheirAccount() {
         homePage.userDeletesTheirAccount();
+    }
+
+    @Then("User is logged in successfully")
+    public void userIsLoggedInSuccessfully() {
+        homePage.userIsLoggedInSuccessfully();
+    }
+
+    @When("User logs out")
+    public void userLogsOut() {
+        homePage.userLogsOut();
     }
 
 }

@@ -43,13 +43,22 @@ public abstract class Page {
     @FindBy(xpath = "//a[text()='Continue']")
     WebElement continueButton;
 
+    @FindBy(xpath = "//a[contains(text(), 'Logout')]")
+    WebElement logoutButton;
+
+    @FindBy(xpath = "//a[contains(text(), 'Delete Account')]")
+    WebElement deleteAccountButton;
+
+    @FindBy(xpath = "//a[contains(text(), 'Logged in as')]")
+    WebElement loggedInAsUserLink;
+
     protected boolean checkIfElementIsVisible(WebElement webElement, String elementName) {
         ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
         return webElement.isDisplayed();
     }
 
     protected void clickElement(WebElement webElement, String elementName) {
-        ExplicitWaitManager.waitUntilElementIsClickable(webElement, elementName);
+        checkIfElementIsVisible(webElement, elementName);
         webElement.click();
         Log.debug("\"" + elementName + "\" is clicked");
     }

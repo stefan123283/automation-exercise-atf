@@ -11,6 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.*;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.stefan.automation.stepdefinitions")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "")
 
 public class CucumberTestRunner {
 }

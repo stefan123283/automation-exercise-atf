@@ -1,10 +1,31 @@
 package com.stefan.automation.managers;
 
 import com.github.javafaker.Faker;
+import com.stefan.automation.models.User;
 
 public class FakeDataManager {
 
     private static final Faker faker = new Faker();
+
+    public static User generateUser() {
+        User user = new User();
+        user.setUsername(generateRandomUsername());
+        user.setEmail(generateRandomEmail());
+        user.setPassword(generateRandomPassword());
+        user.setBirthDay(generateRandomDay());
+        user.setBirthMonth(generateRandomMonth());
+        user.setBirthYear(generateRandomYear());
+        user.setFirstName(generateRandomFirstName());
+        user.setLastName(generateRandomLastName());
+        user.setCompany(generateRandomCompany());
+        user.setAddress(generateRandomStreetAddress());
+        user.setState(generateRandomState());
+        user.setCity(generateRandomCity());
+        user.setZipCode(generateRandomZipCode());
+        user.setMobileNumber(generateRandomMobileNumber());
+        Log.info("Generated user data: " + user);
+        return user;
+    }
 
     public static String generateRandomUsername() {
         return faker.name().username();

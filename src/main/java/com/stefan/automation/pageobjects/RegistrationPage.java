@@ -61,31 +61,32 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = "//button[text()='Create Account']")
     WebElement createAccountButton;
 
-    public void userCompletesRegistrationForm() {
+    public void userCompletesRegistrationForm(String password, String birthDate, String birthMonth, String birthYear,
+                                              String firstName, String lastName, String company, String address, String state,
+                                              String city, String zipCode, String mobileNumber) {
         Log.info("Completing registration form");
         ExtentReportManager.addTestStep("User completes registration form");
         clickElement(mrCheckbox, "Mr. checkbox");
-        sendKeysToElement(passwordTextBox, "Password text box", FakeDataManager.generateRandomPassword());
+        sendKeysToElement(passwordTextBox, "Password text box", password);
         clickElement(selectDaysBox, "Select days box");
-        sendKeysToElement(selectDaysBox, "Select days box", FakeDataManager.generateRandomDay());
+        sendKeysToElement(selectDaysBox, "Select days box", birthDate);
         pressEnter(selectDaysBox, "Select days box");
-        sendKeysToElement(selectMonthsBox, "Select months box", FakeDataManager.generateRandomMonth());
+        sendKeysToElement(selectMonthsBox, "Select months box", birthMonth);
         pressEnter(selectMonthsBox, "Select months box");
-        sendKeysToElement(selectYearsBox, "Select years box", FakeDataManager.generateRandomYear());
+        sendKeysToElement(selectYearsBox, "Select years box", birthYear);
         pressEnter(selectYearsBox, "Select years box");
         clickElement(newsletterCheckbox, "Newsletter checkbox");
         clickElement(receiveSpecialOffersCheckbox, "Receive special offers checkbox");
-        sendKeysToElement(firstNameTextBox, "First name text box", FakeDataManager.generateRandomFirstName());
-        sendKeysToElement(lastNameTextBox, "Last name text box", FakeDataManager.generateRandomLastName());
-        sendKeysToElement(companyTextBox, "Company text box", FakeDataManager.generateRandomCompany());
-        sendKeysToElement(addressTextBox, "Address text box", FakeDataManager.generateRandomStreetAddress());
-        sendKeysToElement(stateTextBox, "State text box", FakeDataManager.generateRandomState());
-        sendKeysToElement(cityTextBox, "City text box", FakeDataManager.generateRandomCity());
-        sendKeysToElement(zipCodeTextBox, "Zipcode text box", FakeDataManager.generateRandomZipCode());
-        sendKeysToElement(mobileNumberTextBox, "Mobile Number text box", FakeDataManager.generateRandomMobileNumber());
+        sendKeysToElement(firstNameTextBox, "First name text box", firstName);
+        sendKeysToElement(lastNameTextBox, "Last name text box", lastName);
+        sendKeysToElement(companyTextBox, "Company text box", company);
+        sendKeysToElement(addressTextBox, "Address text box", address);
+        sendKeysToElement(stateTextBox, "State text box", state);
+        sendKeysToElement(cityTextBox, "City text box", city);
+        sendKeysToElement(zipCodeTextBox, "Zipcode text box", zipCode);
+        sendKeysToElement(mobileNumberTextBox, "Mobile Number text box", mobileNumber);
         clickElement(createAccountButton, "[Create Account] button");
         Log.info("Registration form completed");
     }
-
 
 }
