@@ -2,10 +2,11 @@ package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.ExplicitWaitManager;
 import com.stefan.automation.managers.Log;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public abstract class Page {
 
@@ -52,19 +53,25 @@ public abstract class Page {
     @FindBy(xpath = "//a[contains(text(), 'Logged in as')]")
     WebElement loggedInAsUserLink;
 
-    protected boolean checkIfElementIsVisible(WebElement webElement, String elementName) {
-        ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
-        return webElement.isDisplayed();
-    }
+    @FindBy(xpath = "//div[text()='Close']")
+    WebElement closeAddButton;
+
+    @FindBy(xpath = "//a[contains(text(), 'Test Cases')]")
+    WebElement testCasesButton;
 
     protected void clickElement(WebElement webElement, String elementName) {
-        checkIfElementIsVisible(webElement, elementName);
-        webElement.click();
+        ExplicitWaitManager.waitUntilElementIsClickable(webElement, elementName);
+        try {
+            webElement.click();
+        } catch (ElementClickInterceptedException e) {
+            Log.debug("Click intercepted for " + elementName + ". Trying JavaScript click");
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", webElement);
+        }
         Log.debug("\"" + elementName + "\" is clicked");
     }
 
     protected void sendKeysToElement(WebElement webElement, String elementName, String keys) {
-        checkIfElementIsVisible(webElement, elementName);
+        ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
         webElement.sendKeys(keys);
         Log.debug("Value is entered in the \"" + elementName + "\"");
     }
@@ -75,7 +82,6 @@ public abstract class Page {
     }
 
     protected void switchToFrame(WebElement frame, String frameName) {
-        checkIfElementIsVisible(frame, frameName);
         driver.switchTo().frame(frame);
         Log.debug("Switched to \"" + frameName + "\" context");
     }
@@ -83,6 +89,24 @@ public abstract class Page {
     protected void switchToDefaultContent() {
         driver.switchTo().defaultContent();
         Log.debug("Switched back to the main page context");
+    }
+
+    protected void acceptAlert() {
+        ExplicitWaitManager.waitUntilAlertIsVisible();
+        Log.debug("Accepting the Javascript alert");
+        driver.switchTo().alert().accept();
+    }
+
+    public void closePopUpAddIfPresent() {
+        List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
+        Log.debug("The size of the ads frame list: " + adsFrameList.size());
+        if (!adsFrameList.isEmpty() && adsFrameList.getLast().isDisplayed()) {
+            switchToFrame(adsFrameList.getLast(), "Advertisement frame");
+            if (closeAddButton.isDisplayed()) {
+                clickElement(closeAddButton, "[Close add] button");
+            }
+            switchToDefaultContent();
+        }
     }
 
 }

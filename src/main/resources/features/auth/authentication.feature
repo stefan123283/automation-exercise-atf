@@ -1,13 +1,14 @@
 Feature: User authentification
 
   Background:
-    Given User opens application
+    When User opens application
     And User data is generated
 
   @ui
   @authentification
   @positive
-  Scenario: Login yser with correct email and password
+  Scenario: Login user with correct email and password
+    Then Home page is visible
     When User navigates to Login page
     And User completes signup form
     And User completes registration form
@@ -23,6 +24,7 @@ Feature: User authentification
   @authentification
   @negative
   Scenario: Login user with incorrect email and password
-    And User navigates to Login page
-    When User completes login form
+    Then Home page is visible
+    When User navigates to Login page
+    And User completes login form
     Then Authentification is unsuccessfully

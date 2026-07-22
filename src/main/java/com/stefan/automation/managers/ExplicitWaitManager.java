@@ -7,31 +7,60 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ExplicitWaitManager {
+public final class ExplicitWaitManager {
 
     private static final int EXPLICIT_WAIT = Integer.parseInt(ConfigReaderManager.getProperty("explicitWait"));
-    private static final WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getInstance().getDriver(), Duration.ofSeconds(EXPLICIT_WAIT));
+
+    private ExplicitWaitManager() {
+    }
+
+    private static WebDriverWait createWait() {
+        return new WebDriverWait(DriverManager.getInstance().getDriver(), Duration.ofSeconds(EXPLICIT_WAIT));
+    }
 
     public static void waitUntilElementIsVisible(WebElement webElement, String elementName) {
         Log.debug("Waiting \"" + elementName + "\" to be visible (timeout: " + EXPLICIT_WAIT + "s)");
         try {
-            webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+            createWait().until(ExpectedConditions.visibilityOf(webElement));
         } catch (TimeoutException e) {
-            Log.error("\"" + elementName + "\" not found (timeout: " + EXPLICIT_WAIT + "s)");
-            throw new RuntimeException("\"" + elementName + "\" not found (timeout: " + EXPLICIT_WAIT + "s)", e);
+            Log.error("\"" + elementName + "\" is not visible");
+            throw new IllegalStateException("\"" + elementName + "\" is not visible", e);
         }
         Log.debug("\"" + elementName + "\" is visible");
+    }
+
+    public static boolean checkIfElementIsVisible(WebElement element, String elementName) {
+        Log.debug("Checking if \"" + elementName + "\" is visible (timeout : " + EXPLICIT_WAIT + "s)");
+        try {
+            createWait().until(ExpectedConditions.visibilityOf(element));
+            Log.debug("\"" + elementName + "\" is visible");
+            return true;
+        } catch (TimeoutException e) {
+            Log.debug("\"" + elementName + "\" is not visible");
+            return false;
+        }
     }
 
     public static void waitUntilElementIsClickable(WebElement webElement, String elementName) {
         Log.debug("Waiting \"" + elementName + "\" to be clickable (timeout: " + EXPLICIT_WAIT + "s)");
         try {
-            webDriverWait.until(ExpectedConditions.elementToBeClickable(webElement));
+            createWait().until(ExpectedConditions.elementToBeClickable(webElement));
         } catch (TimeoutException e) {
-            Log.error("\"" + elementName + "\" is not clickable (timeout: " + EXPLICIT_WAIT + "s)");
-            throw new RuntimeException("\"" + elementName + "\" is not clickable (timeout: " + EXPLICIT_WAIT + "s)", e);
+            Log.error("\"" + elementName + "\" is not clickable");
+            throw new IllegalStateException("\"" + elementName + "\" is not clickable", e);
         }
         Log.debug("\"" + elementName + "\" is clickable");
+    }
+
+    public static void waitUntilAlertIsVisible() {
+        Log.debug("Waiting JavaScript alert to be visible (timeout: " + EXPLICIT_WAIT + "s)");
+        try {
+            createWait().until(ExpectedConditions.alertIsPresent());
+        } catch (TimeoutException e) {
+            Log.error("JavaScript alert is not visible");
+            throw new IllegalStateException("JavaScript alert is not visible", e);
+        }
+        Log.debug("JavaScript alert is visible");
     }
 
 }

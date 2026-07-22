@@ -1,6 +1,7 @@
 package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.AssertManager;
+import com.stefan.automation.managers.ExplicitWaitManager;
 import com.stefan.automation.managers.ExtentReportManager;
 import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +39,7 @@ public class LoginPage extends Page {
     WebElement signupErrorMessage;
 
     public void loginPageIsDisplayed(){
-        AssertManager.assertTrue(checkIfElementIsVisible(loginButton, "[Login] button"), "Login page is displayed");
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(loginButton, "[Login] button"), "Login page is displayed");
     }
 
     public void userCompletesSignupForm(String username, String email) {
@@ -59,11 +60,11 @@ public class LoginPage extends Page {
     }
 
     public void loginErrorMessageIsDisplayed(){
-        AssertManager.assertTrue(checkIfElementIsVisible(loginErrorMessage, "Login error message"), "Authentification is unsuccessfully");
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(loginErrorMessage, "Login error message"), "Authentification is unsuccessfully");
     }
 
     public void signupErrorMessageIsDisplayed(){
-        AssertManager.assertTrue(checkIfElementIsVisible(signupErrorMessage, "Signup error message"), "Registration is unsuccessfully");
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(signupErrorMessage, "Signup error message"), "Registration is unsuccessfully");
     }
 
 }
