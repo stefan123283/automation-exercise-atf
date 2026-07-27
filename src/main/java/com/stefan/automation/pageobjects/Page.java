@@ -2,6 +2,7 @@ package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.ExplicitWaitManager;
 import com.stefan.automation.managers.Log;
+import com.stefan.automation.managers.ScrollManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -41,6 +42,9 @@ public abstract class Page {
     @FindBy(id = "subscribe")
     WebElement submitSubscriptionEmailButton;
 
+    @FindBy(xpath = "//div[text()='You have been successfully subscribed!']")
+    WebElement subscriptionSectionSuccessMessage;
+
     @FindBy(xpath = "//a[text()='Continue']")
     WebElement continueButton;
 
@@ -53,14 +57,12 @@ public abstract class Page {
     @FindBy(xpath = "//a[contains(text(), 'Logged in as')]")
     WebElement loggedInAsUserLink;
 
-    @FindBy(xpath = "//div[text()='Close']")
-    WebElement closeAddButton;
-
     @FindBy(xpath = "//a[contains(text(), 'Test Cases')]")
     WebElement testCasesButton;
 
     protected void clickElement(WebElement webElement, String elementName) {
         ExplicitWaitManager.waitUntilElementIsClickable(webElement, elementName);
+        ScrollManager.scrollToElement(webElement, elementName);
         try {
             webElement.click();
         } catch (ElementClickInterceptedException e) {
@@ -72,6 +74,7 @@ public abstract class Page {
 
     protected void sendKeysToElement(WebElement webElement, String elementName, String keys) {
         ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
+        ScrollManager.scrollToElement(webElement, elementName);
         webElement.sendKeys(keys);
         Log.debug("Value is entered in the \"" + elementName + "\"");
     }
@@ -102,8 +105,10 @@ public abstract class Page {
         Log.debug("The size of the ads frame list: " + adsFrameList.size());
         if (!adsFrameList.isEmpty() && adsFrameList.getLast().isDisplayed()) {
             switchToFrame(adsFrameList.getLast(), "Advertisement frame");
-            if (closeAddButton.isDisplayed()) {
-                clickElement(closeAddButton, "[Close add] button");
+            List<WebElement> closeButtonsList =
+                    driver.findElements(By.xpath("//div[text()='Close']"));
+            if (!closeButtonsList.isEmpty() && closeButtonsList.getFirst().isDisplayed()) {
+                clickElement(closeButtonsList.getFirst(), "[Close ad] button");
             }
             switchToDefaultContent();
         }

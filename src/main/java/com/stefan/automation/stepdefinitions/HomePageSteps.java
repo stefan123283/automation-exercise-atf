@@ -1,6 +1,7 @@
 package com.stefan.automation.stepdefinitions;
 
 import com.stefan.automation.managers.DriverManager;
+import com.stefan.automation.managers.FakeDataManager;
 import com.stefan.automation.pageobjects.HomePage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -49,6 +50,31 @@ public class HomePageSteps {
     @When("User navigates to Test Cases page")
     public void userNavigatesToTestCasesPage() {
         homePage.userNavigatesToTestCasesPage();
+    }
+
+    @When("User navigates to All Products page")
+    public void userNavigatesToAllProductsPage() {
+        homePage.userNavigatesToAllProductsPage();
+    }
+
+    @Then("Subscription section is visible")
+    public void subscriptionSectionIsVisible() {
+        homePage.subscriptionSectionIsVisible();
+    }
+
+    @When("User submits subscription email address")
+    public void userSubmitsSubscriptionEmailAddress() {
+        homePage.userSubmitsSubscriptionEmailAddress(FakeDataManager.generateRandomEmail());
+    }
+
+    @Then("User is subscribed successfully")
+    public void userIsSubscribedSuccessfully() {
+        homePage.userIsSubscribedSuccessfully();
+    }
+
+    @When("User navigates to Cart page")
+    public void userNavigatesToCartPage() {
+        homePage.userNavigatesToCartPage();
     }
 
 }

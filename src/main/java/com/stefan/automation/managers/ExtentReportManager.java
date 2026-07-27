@@ -11,11 +11,14 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.io.IOException;
 
-public class ExtentReportManager {
+public final class ExtentReportManager {
 
     private static ExtentReports extentReports;
     private static ExtentTest extentTest;
     public static String reportPath;
+
+    private ExtentReportManager() {
+    }
 
     public static ExtentReports getReportInstance() {
 

@@ -3,9 +3,12 @@ package com.stefan.automation.managers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Log {
+public final class Log {
 
     private static final Logger logger = LogManager.getLogger();
+
+    private Log() {
+    }
 
     public static void debug(String message) {
         logger.debug(message);

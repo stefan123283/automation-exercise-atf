@@ -10,11 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
-public class EmailManager {
+public final class EmailManager {
 
     private static final String REPORT_SENDER_GMAIL = ConfigReaderManager.getProperty("reportSenderGmail");
     private static final String REPORT_SENDER_APP_PASSWORD = ConfigReaderManager.getProperty("reportSenderAppPassword");
     private static final String REPORT_RECEIVER_GMAIL = ConfigReaderManager.getProperty("reportReceiverGmail");
+
+    private EmailManager() {
+    }
 
     public static void sendTestReport(String reportPath) {
         // SMTP server properties

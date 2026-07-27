@@ -3,9 +3,12 @@ package com.stefan.automation.managers;
 import com.github.javafaker.Faker;
 import com.stefan.automation.models.User;
 
-public class FakeDataManager {
+public final class FakeDataManager {
 
     private static final Faker faker = new Faker();
+
+    private FakeDataManager() {
+    }
 
     public static User generateUser() {
         User user = new User();

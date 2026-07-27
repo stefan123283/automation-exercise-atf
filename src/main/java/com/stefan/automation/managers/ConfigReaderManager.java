@@ -4,10 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigReaderManager {
+public final class ConfigReaderManager {
 
     private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
     private static Properties properties;
+
+    private ConfigReaderManager() {
+    }
 
     private static void initProperties() {
         Log.debug("Loading test configuration");

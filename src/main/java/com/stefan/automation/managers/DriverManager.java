@@ -8,7 +8,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-public class DriverManager {
+public final class DriverManager {
 
     private static final String BROWSER_TYPE = ConfigReaderManager.getProperty("browserType");
     private static final String INCOGNITO_MODE = ConfigReaderManager.getProperty("incognitoMode");

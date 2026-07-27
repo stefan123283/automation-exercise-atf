@@ -62,4 +62,33 @@ public class HomePage extends Page {
         closePopUpAddIfPresent();
     }
 
+    public void userNavigatesToAllProductsPage() {
+        Log.info("Navigating to All Products page");
+        ExtentReportManager.addTestStep("User navigates to All Products page");
+        clickElement(productsLink, "[Products] button");
+        closePopUpAddIfPresent();
+    }
+
+    public void subscriptionSectionIsVisible(){
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(subscriptionHeading, "Subscription heading"), "Subscription section is visible");
+    }
+
+    public void userSubmitsSubscriptionEmailAddress(String emailAddress){
+        Log.info("Submitting subscription email address");
+        ExtentReportManager.addTestStep("User submits subscription email address");
+        sendKeysToElement(subscriptionEmailTextBox, "Subscription email text box", emailAddress);
+        clickElement(submitSubscriptionEmailButton, "Submit subscription email button");
+    }
+
+    public void userIsSubscribedSuccessfully(){
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(subscriptionSectionSuccessMessage, "Subscription section success message"), "User is subscribed successfully");
+    }
+
+    public void userNavigatesToCartPage() {
+        Log.info("Navigating to Cart page");
+        ExtentReportManager.addTestStep("User navigates to Cart page");
+        clickElement(cartLink, "[Cart] button");
+        closePopUpAddIfPresent();
+    }
+
 }
