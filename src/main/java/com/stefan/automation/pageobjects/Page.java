@@ -75,6 +75,10 @@ public abstract class Page {
     protected void sendKeysToElement(WebElement webElement, String elementName, String keys) {
         ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
         ScrollManager.scrollToElement(webElement, elementName);
+        if (webElement.getTagName().equals("input")) {
+            Log.debug("Clearing the value of the \"" + elementName + "\" element");
+            webElement.clear();
+        }
         webElement.sendKeys(keys);
         Log.debug("Value is entered in the \"" + elementName + "\"");
     }
@@ -100,13 +104,17 @@ public abstract class Page {
         driver.switchTo().alert().accept();
     }
 
+    protected String getElementAttributeValue(WebElement webElement, String elementName, String attributeName) {
+        Log.debug("The value of the attribute \"" + attributeName + "\" of the \"" + elementName + "\" element is: \"" + webElement.getAttribute(attributeName) + "\"");
+        return webElement.getAttribute(attributeName);
+    }
+
     public void closePopUpAddIfPresent() {
         List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
         Log.debug("The size of the ads frame list: " + adsFrameList.size());
         if (!adsFrameList.isEmpty() && adsFrameList.getLast().isDisplayed()) {
             switchToFrame(adsFrameList.getLast(), "Advertisement frame");
-            List<WebElement> closeButtonsList =
-                    driver.findElements(By.xpath("//div[text()='Close']"));
+            List<WebElement> closeButtonsList = driver.findElements(By.xpath("//div[text()='Close']"));
             if (!closeButtonsList.isEmpty() && closeButtonsList.getFirst().isDisplayed()) {
                 clickElement(closeButtonsList.getFirst(), "[Close ad] button");
             }

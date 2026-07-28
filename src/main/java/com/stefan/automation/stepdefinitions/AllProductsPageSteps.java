@@ -1,7 +1,10 @@
 package com.stefan.automation.stepdefinitions;
 
 import com.stefan.automation.managers.DriverManager;
+import com.stefan.automation.managers.ExtentReportManager;
+import com.stefan.automation.managers.Log;
 import com.stefan.automation.pageobjects.AllProductsPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
@@ -29,5 +32,19 @@ public class AllProductsPageSteps {
     @Then("The searched product is visible")
     public void theSearchedProductIsVisible() {
         allProductsPage.theSearchedProductIsVisible();
+    }
+
+    @When("User adds first two products to cart")
+    public void userAddsFirstTwoProductsToCart(){
+        Log.info("User adds first two products to cart");
+        ExtentReportManager.addTestStep("User adds first two products to cart");
+        allProductsPage.userAddsFirstTwoProductsToCart();
+    }
+
+    @And("User clicks [View Cart] button")
+    public void userClickViewCartButton(){
+        Log.info("User clicks [View Cart] button");
+        ExtentReportManager.addTestStep("User clicks [View Cart] button");
+        allProductsPage.userClickViewCartButton();
     }
 }
