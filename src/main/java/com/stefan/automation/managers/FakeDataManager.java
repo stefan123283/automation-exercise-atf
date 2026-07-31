@@ -87,4 +87,8 @@ public final class FakeDataManager {
         return faker.phoneNumber().phoneNumber();
     }
 
+    public static String generateRandomCardNumber(){
+        return faker.business().creditCardNumber();
+    }
+
 }

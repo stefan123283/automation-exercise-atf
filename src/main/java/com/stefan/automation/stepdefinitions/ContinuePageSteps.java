@@ -20,4 +20,9 @@ public class ContinuePageSteps {
         continuePage.accountIsDeletedSuccessfully();
     }
 
+    @Then("Order is placed successfully")
+    public void orderPlacedSuccessfully() {
+        continuePage.orderPlacedSuccessfully();
+    }
+
 }
