@@ -29,10 +29,10 @@ public final class ExplicitWaitManager {
         Log.debug("\"" + elementName + "\" is visible");
     }
 
-    public static boolean checkIfElementIsVisible(WebElement element, String elementName) {
+    public static boolean checkIfElementIsVisible(WebElement webElement, String elementName) {
         Log.debug("Checking if \"" + elementName + "\" is visible (timeout : " + EXPLICIT_WAIT + "s)");
         try {
-            createWait().until(ExpectedConditions.visibilityOf(element));
+            createWait().until(ExpectedConditions.visibilityOf(webElement));
             Log.debug("\"" + elementName + "\" is visible");
             return true;
         } catch (TimeoutException e) {
@@ -61,6 +61,18 @@ public final class ExplicitWaitManager {
             throw new IllegalStateException("JavaScript alert is not visible", e);
         }
         Log.debug("JavaScript alert is visible");
+    }
+
+    public static boolean checkIfElementIsNotVisible(WebElement webElement, String elementName) {
+        Log.debug("Checking if \"" + elementName + "\" is not visible (timeout : " + EXPLICIT_WAIT + "s)");
+        try {
+            createWait().until(ExpectedConditions.invisibilityOf(webElement));
+            Log.debug("\"" + elementName + "\" is not visible");
+            return true;
+        } catch (TimeoutException e) {
+            Log.debug("\"" + elementName + "\" is still visible");
+            return false;
+        }
     }
 
 }

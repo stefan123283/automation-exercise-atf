@@ -35,16 +35,46 @@ public class AllProductsPageSteps {
     }
 
     @When("User adds first two products to cart")
-    public void userAddsFirstTwoProductsToCart(){
+    public void userAddsFirstTwoProductsToCart() {
         Log.info("User adds first two products to cart");
         ExtentReportManager.addTestStep("User adds first two products to cart");
         allProductsPage.userAddsFirstTwoProductsToCart();
     }
 
     @And("User clicks [View Cart] button")
-    public void userClickViewCartButton(){
+    public void userClickViewCartButton() {
         Log.info("User clicks [View Cart] button");
         ExtentReportManager.addTestStep("User clicks [View Cart] button");
         allProductsPage.userClickViewCartButton();
+    }
+
+    @Then("Dress category page is visible")
+    public void dressCategoryPageIsVisible() {
+        allProductsPage.dressCategoryPageIsVisible();
+    }
+
+    @Then("Tshirts category page is visible")
+    public void tShirtsCategoryPageIsVisible() {
+        allProductsPage.tShirtsCategoryPageIsVisible();
+    }
+
+    @When("User navigates to Polo brand page")
+    public void userNavigatesToPoloBrandPage() {
+        allProductsPage.userNavigatesToPoloBrandPage();
+    }
+
+    @Then("Polo brand page is visible")
+    public void poloBrandPageIsVisible() {
+        allProductsPage.poloBrandPageIsVisible();
+    }
+
+    @When("User navigates to H&M brand page")
+    public void userNavigatesToHAndMBrandPage() {
+        allProductsPage.userNavigatesToHAndMBrandPage();
+    }
+
+    @Then("H&M brand page is visible")
+    public void hAndMBrandPageIsVisible() {
+        allProductsPage.hAndMBrandPageIsVisible();
     }
 }

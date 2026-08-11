@@ -1,9 +1,6 @@
 package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.managers.AssertManager;
-import com.stefan.automation.managers.ExplicitWaitManager;
-import com.stefan.automation.managers.ExtentReportManager;
-import com.stefan.automation.managers.Log;
+import com.stefan.automation.managers.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,10 +35,10 @@ public class ContactUsPage extends Page {
     public void userCompletesContactUsForm(String name, String email, String subject, String message) {
         Log.info("Completing contact us form");
         ExtentReportManager.addTestStep("User completes contact us form");
-        sendKeysToElement(nameTextBox, "Name text box", name);
-        sendKeysToElement(emailTextBox, "Email text box", email);
-        sendKeysToElement(subjectTextBox, "Subject text box", subject);
-        sendKeysToElement(messageTextBox, "Message text box", message);
+        KeyboardManager.enterValueIntoElement(nameTextBox, "Name text box", name);
+        KeyboardManager.enterValueIntoElement(emailTextBox, "Email text box", email);
+        KeyboardManager.enterValueIntoElement(subjectTextBox, "Subject text box", subject);
+        KeyboardManager.enterValueIntoElement(messageTextBox, "Message text box", message);
         clickElement(submitButton, "[Submit] button");
         acceptAlert();
     }

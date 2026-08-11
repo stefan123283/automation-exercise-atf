@@ -1,7 +1,7 @@
 package com.stefan.automation.pageobjects;
 
 import com.stefan.automation.managers.ExtentReportManager;
-import com.stefan.automation.managers.FakeDataManager;
+import com.stefan.automation.managers.KeyboardManager;
 import com.stefan.automation.managers.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,24 +67,24 @@ public class RegistrationPage extends Page {
         Log.info("Completing registration form");
         ExtentReportManager.addTestStep("User completes registration form");
         clickElement(mrCheckbox, "Mr. checkbox");
-        sendKeysToElement(passwordTextBox, "Password text box", password);
+        KeyboardManager.enterValueIntoElement(passwordTextBox, "Password text box", password);
         clickElement(selectDaysBox, "Select days box");
-        sendKeysToElement(selectDaysBox, "Select days box", birthDate);
-        pressEnter(selectDaysBox, "Select days box");
-        sendKeysToElement(selectMonthsBox, "Select months box", birthMonth);
-        pressEnter(selectMonthsBox, "Select months box");
-        sendKeysToElement(selectYearsBox, "Select years box", birthYear);
-        pressEnter(selectYearsBox, "Select years box");
+        KeyboardManager.enterValueIntoElement(selectDaysBox, "Select days box", birthDate);
+        KeyboardManager.pressEnterOnElement(selectDaysBox, "Select days box");
+        KeyboardManager.enterValueIntoElement(selectMonthsBox, "Select months box", birthMonth);
+        KeyboardManager.pressEnterOnElement(selectMonthsBox, "Select months box");
+        KeyboardManager.enterValueIntoElement(selectYearsBox, "Select years box", birthYear);
+        KeyboardManager.pressEnterOnElement(selectYearsBox, "Select years box");
         clickElement(newsletterCheckbox, "Newsletter checkbox");
         clickElement(receiveSpecialOffersCheckbox, "Receive special offers checkbox");
-        sendKeysToElement(firstNameTextBox, "First name text box", firstName);
-        sendKeysToElement(lastNameTextBox, "Last name text box", lastName);
-        sendKeysToElement(companyTextBox, "Company text box", company);
-        sendKeysToElement(addressTextBox, "Address text box", address);
-        sendKeysToElement(stateTextBox, "State text box", state);
-        sendKeysToElement(cityTextBox, "City text box", city);
-        sendKeysToElement(zipCodeTextBox, "Zipcode text box", zipCode);
-        sendKeysToElement(mobileNumberTextBox, "Mobile Number text box", mobileNumber);
+        KeyboardManager.enterValueIntoElement(firstNameTextBox, "First name text box", firstName);
+        KeyboardManager.enterValueIntoElement(lastNameTextBox, "Last name text box", lastName);
+        KeyboardManager.enterValueIntoElement(companyTextBox, "Company text box", company);
+        KeyboardManager.enterValueIntoElement(addressTextBox, "Address text box", address);
+        KeyboardManager.enterValueIntoElement(stateTextBox, "State text box", state);
+        KeyboardManager.enterValueIntoElement(cityTextBox, "City text box", city);
+        KeyboardManager.enterValueIntoElement(zipCodeTextBox, "Zipcode text box", zipCode);
+        KeyboardManager.enterValueIntoElement(mobileNumberTextBox, "Mobile Number text box", mobileNumber);
         clickElement(createAccountButton, "[Create Account] button");
         Log.info("Registration form completed");
     }

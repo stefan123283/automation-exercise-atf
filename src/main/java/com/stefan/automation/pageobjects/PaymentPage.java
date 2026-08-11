@@ -1,9 +1,6 @@
 package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.managers.AssertManager;
-import com.stefan.automation.managers.ExplicitWaitManager;
-import com.stefan.automation.managers.ExtentReportManager;
-import com.stefan.automation.managers.Log;
+import com.stefan.automation.managers.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,11 +39,11 @@ public class PaymentPage extends Page {
     public void userPopulatesThePaymentForm(String nameOnCard, String cardNumber, String cvc, String expirationMonth, String expirationYear) {
         Log.info("User populates the payment form");
         ExtentReportManager.addTestStep("User populates the payment form");
-        sendKeysToElement(nameOnCardTextBox, "Name on card text box", nameOnCard);
-        sendKeysToElement(cardNumberTextBox, "Card number text box", cardNumber);
-        sendKeysToElement(cvcTextBox, "CVC text box", cvc);
-        sendKeysToElement(expirationMonthTextBox, "Expiration month text box", expirationMonth);
-        sendKeysToElement(expirationYearTextBox, "Expiration year text box", expirationYear);
+        KeyboardManager.enterValueIntoElement(nameOnCardTextBox, "Name on card text box", nameOnCard);
+        KeyboardManager.enterValueIntoElement(cardNumberTextBox, "Card number text box", cardNumber);
+        KeyboardManager.enterValueIntoElement(cvcTextBox, "CVC text box", cvc);
+        KeyboardManager.enterValueIntoElement(expirationMonthTextBox, "Expiration month text box", expirationMonth);
+        KeyboardManager.enterValueIntoElement(expirationYearTextBox, "Expiration year text box", expirationYear);
         clickElement(payAndConfirmOrderButton, "[Pay and Confirm Order] button");
     }
 

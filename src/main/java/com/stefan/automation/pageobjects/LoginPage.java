@@ -1,9 +1,6 @@
 package com.stefan.automation.pageobjects;
 
-import com.stefan.automation.managers.AssertManager;
-import com.stefan.automation.managers.ExplicitWaitManager;
-import com.stefan.automation.managers.ExtentReportManager;
-import com.stefan.automation.managers.Log;
+import com.stefan.automation.managers.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,8 +42,8 @@ public class LoginPage extends Page {
     public void userCompletesSignupForm(String username, String email) {
         ExtentReportManager.addTestStep("User completes signup form");
         Log.info("Completing signup form");
-        sendKeysToElement(usernameTextBox, "Username text box", username);
-        sendKeysToElement(signUpEmailTextBox, "Signup email text box", email);
+        KeyboardManager.enterValueIntoElement(usernameTextBox, "Username text box", username);
+        KeyboardManager.enterValueIntoElement(signUpEmailTextBox, "Signup email text box", email);
         clickElement(signupButton, "[Signup] button");
         Log.info("Signup form completed");
     }
@@ -54,8 +51,8 @@ public class LoginPage extends Page {
     public void userCompletesLoginForm(String email, String password) {
         ExtentReportManager.addTestStep("User completes login form");
         Log.info("Completing login form");
-        sendKeysToElement(loginEmailTextBox, "Email Address text box", email);
-        sendKeysToElement(passwordTextBox, "Password text box", password);
+        KeyboardManager.enterValueIntoElement(loginEmailTextBox, "Email Address text box", email);
+        KeyboardManager.enterValueIntoElement(passwordTextBox, "Password text box", password);
         clickElement(loginButton, "[Login] button");
     }
 

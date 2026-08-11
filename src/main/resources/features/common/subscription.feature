@@ -5,7 +5,7 @@ Feature: Subscription
 
   @ui
   @common
-  @subscriptionHomePage
+  @verifySubscriptionInHomePage
   Scenario: Verify subscription in home page
     Then Home page is visible
     When User scrolls to bottom of page
@@ -15,8 +15,8 @@ Feature: Subscription
 
   @ui
   @common
-  @subscriptionCartPage
-  Scenario: Verify subscription in home page
+  @verifySubscriptionInCartPage
+  Scenario: Verify subscription in cart page
     Then Home page is visible
     When User navigates to Cart page
     Then Cart page is visible

@@ -16,6 +16,24 @@ public class HomePage extends Page {
     @FindBy(xpath = "//h2[text()='Full-Fledged practice website for Automation Engineers']")
     WebElement homePageHeading;
 
+    @FindBy(xpath = "//a[contains(.,'Women')]")
+    WebElement womenCategory;
+
+    @FindBy(xpath = "//a[contains(.,'Dress')]")
+    WebElement dressSubcategory;
+
+    @FindBy(xpath = "//a[contains(.,'Men')]")
+    WebElement menCategory;
+
+    @FindBy(xpath = "//a[contains(.,'Tshirts')]")
+    WebElement tShirtsSubcategory;
+
+    @FindBy(xpath = "//div[@class='recommended_items']//a[text()='Add to cart']")
+    WebElement addToCartRecommendedProductButton;
+
+    @FindBy(id = "scrollUp")
+    WebElement scrollUpArrow;
+
     public void userOpensApplication() {
         Log.info("Opening application URL");
         ExtentReportManager.addTestStep("User opens application");
@@ -69,18 +87,18 @@ public class HomePage extends Page {
         closePopUpAddIfPresent();
     }
 
-    public void subscriptionSectionIsVisible(){
+    public void subscriptionSectionIsVisible() {
         AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(subscriptionHeading, "Subscription heading"), "Subscription section is visible");
     }
 
-    public void userSubmitsSubscriptionEmailAddress(String emailAddress){
+    public void userSubmitsSubscriptionEmailAddress(String emailAddress) {
         Log.info("Submitting subscription email address");
         ExtentReportManager.addTestStep("User submits subscription email address");
-        sendKeysToElement(subscriptionEmailTextBox, "Subscription email text box", emailAddress);
+        KeyboardManager.enterValueIntoElement(subscriptionEmailTextBox, "Subscription email text box", emailAddress);
         clickElement(submitSubscriptionEmailButton, "Submit subscription email button");
     }
 
-    public void userIsSubscribedSuccessfully(){
+    public void userIsSubscribedSuccessfully() {
         AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(subscriptionSectionSuccessMessage, "Subscription section success message"), "User is subscribed successfully");
     }
 
@@ -89,6 +107,41 @@ public class HomePage extends Page {
         ExtentReportManager.addTestStep("User navigates to Cart page");
         clickElement(cartLink, "[Cart] button");
         closePopUpAddIfPresent();
+    }
+
+    public void userNavigatesToDressCategoryPage() {
+        Log.info("Navigating to Dress category page");
+        ExtentReportManager.addTestStep("User navigates to Dress category page");
+        clickElement(womenCategory, "Women category link");
+        closePopUpAddIfPresent();
+        clickElement(dressSubcategory, "Dress subcategory link");
+    }
+
+    public void userNavigatesToTshirtsCategoryPage() {
+        Log.info("Navigating to Tshirts category page");
+        ExtentReportManager.addTestStep("User navigates to Tshirts category page");
+        clickElement(menCategory, "Men category link");
+        closePopUpAddIfPresent();
+        clickElement(tShirtsSubcategory, "Tshirts subcategory link");
+    }
+
+    public void userAddsToCartRecommendedProduct() {
+        Log.info("Adding to cart a recommended product");
+        ExtentReportManager.addTestStep("User adds to cart a recommended product");
+        clickElement(addToCartRecommendedProductButton, "Add to cart a recommended product");
+    }
+
+    public void userClicksTheScrollUpArrow() {
+        Log.info("Clicking scroll up arrow");
+        ExtentReportManager.addTestStep("User clicks the scroll up arrow");
+        clickElement(scrollUpArrow, "Scroll up arrow");
+        closePopUpAddIfPresent();
+        clickElement(scrollUpArrow, "Scroll up arrow");
+    }
+
+    public void pageIsScrolledUp() {
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsNotVisible(scrollUpArrow, "Scroll up arrow"), "Page is scrolled up");
+
     }
 
 }

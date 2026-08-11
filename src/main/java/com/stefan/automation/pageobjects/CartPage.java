@@ -20,14 +20,20 @@ public class CartPage extends Page {
     @FindBy(xpath = "//li[text()='Shopping Cart']")
     WebElement shoppingCartNavigationText;
 
-    @FindBy(xpath = "//table[@id='cart_info_table']//tbody//tr[@id='product-1']//td[@class='cart_quantity']//button")
-    WebElement firstProductQuantityBox;
+    @FindBy(xpath = "//table[@id='cart_info_table']//tbody//tr[contains(@id, 'product-')]//td[@class='cart_quantity']//button")
+    WebElement productQuantityBox;
 
     @FindBy(xpath = "//a[text()='Proceed To Checkout']")
     WebElement proceedToCheckoutButton;
 
     @FindBy(xpath = "//a[contains(., 'Register / Login')]")
     WebElement registerLoginButton;
+
+    @FindBy(xpath = "//table[@id='cart_info_table']//tbody//tr[@id='product-1']//td[@class='cart_delete']//a")
+    WebElement removeFirstProductButton;
+
+    @FindBy(xpath = "//p[contains(., 'Cart is empty! Click here to buy products.')]")
+    WebElement cartIsEmptyMessage;
 
     public void cartPageIsVisible() {
         AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(shoppingCartNavigationText, "Shopping Cart navigation text"), "Cart page is visible");
@@ -39,19 +45,29 @@ public class CartPage extends Page {
         AssertManager.assertTrue(productsList.size() == 2, "Both products are added to cart");
     }
 
-    public void productIsDisplayedWithExactQuantity() {
-        AssertManager.assertTrue((getElementAttributeValue(firstProductQuantityBox, "First product quantity box", "innerText")).equals("4"), "Product is displayed with exact quantity");
+    public void productIsDisplayedWithExactQuantity(String quantity) {
+        AssertManager.assertTrue((getElementAttributeValue(productQuantityBox, "First product quantity box", "innerText")).equals(quantity), "Product is displayed in Cart page with " + quantity + " quantity");
     }
 
     public void userClickOnProceedToCheckoutButton() {
-        Log.debug("Clicking on [Proceed to Checkout] button");
+        Log.info("Clicking on [Proceed to Checkout] button");
         ExtentReportManager.addTestStep("User clicks on [Proceed to Checkout] button");
         clickElement(proceedToCheckoutButton, "[Proceed to Checkout] button");
     }
 
     public void userClickOnRegisterLoginButton() {
-        Log.debug("Clicking on [Register / Login] button");
+        Log.info("Clicking on [Register / Login] button");
         ExtentReportManager.addTestStep("User clicks on [Register / Login] button");
         clickElement(registerLoginButton, "[Register / Login] button");
+    }
+
+    public void userRemovesProductFromCart() {
+        Log.info("Removing product from cart");
+        ExtentReportManager.addTestStep("User removes product from cart");
+        clickElement(removeFirstProductButton, "[X] button");
+    }
+
+    public void productIsRemovedFromCart() {
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(cartIsEmptyMessage, "Cart is empty message"), "Product is removed from cart");
     }
 }

@@ -3,6 +3,7 @@ package com.stefan.automation.stepdefinitions;
 import com.stefan.automation.managers.DriverManager;
 import com.stefan.automation.pageobjects.ContinuePage;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 public class ContinuePageSteps {
@@ -23,6 +24,16 @@ public class ContinuePageSteps {
     @Then("Order is placed successfully")
     public void orderPlacedSuccessfully() {
         continuePage.orderPlacedSuccessfully();
+    }
+
+    @When("User downloads the invoice")
+    public void userDownloadsTheInvoice(){
+        continuePage.userDownloadsTheInvoice();
+    }
+
+    @Then("Invoice is downloaded successfully")
+    public void theInvoiceIsDownloadedSuccessfully(){
+        continuePage.invoiceIsDownloadedSuccessfully("invoice.txt");
     }
 
 }

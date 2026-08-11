@@ -30,7 +30,7 @@ public final class DriverManager {
             case "EDGE" -> {
                 EdgeOptions options = new EdgeOptions();
                 if (INCOGNITO_MODE.equals("enabled")) {
-                    options.addArguments("--incognito");
+                    options.addArguments("--inprivate");
                     Log.info("Initiating Edge driver instance with incognito mode enabled");
                 } else {
                     Log.info("Initiating Edge driver instance with incognito mode disabled");
@@ -40,7 +40,7 @@ public final class DriverManager {
             case "FIREFOX" -> {
                 FirefoxOptions options = new FirefoxOptions();
                 if (INCOGNITO_MODE.equals("enabled")) {
-                    options.addArguments("--incognito");
+                    options.addArguments("-private-window");
                     Log.info("Initiating FireFox driver instance with incognito mode enabled");
                 } else {
                     Log.info("Initiating FireFox driver instance with incognito mode disabled");

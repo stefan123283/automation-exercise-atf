@@ -22,9 +22,9 @@ public class CartPageSteps {
         cartPage.bothProductsAreAddedToCart();
     }
 
-    @And("Product is displayed with exact quantity")
-    public void productIsDisplayedWithExactQuantity() {
-        cartPage.productIsDisplayedWithExactQuantity();
+    @And("Product is displayed in Cart page with {string} quantity")
+    public void productIsDisplayedWithExactQuantity(String quantity) {
+        cartPage.productIsDisplayedWithExactQuantity(quantity);
     }
 
     @When("User clicks on [Proceed to Checkout] button")
@@ -35,5 +35,15 @@ public class CartPageSteps {
     @And("User clicks on [Register Login] button")
     public void userClickOnRegisterLoginButton(){
         cartPage.userClickOnRegisterLoginButton();
+    }
+
+    @When("User removes product from cart")
+    public void userRemovesProductFromCart(){
+        cartPage.userRemovesProductFromCart();
+    }
+
+    @Then("Product is removed from cart")
+    public void productIsRemovedFromCart(){
+        cartPage.productIsRemovedFromCart();
     }
 }

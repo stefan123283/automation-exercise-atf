@@ -3,6 +3,7 @@ package com.stefan.automation.stepdefinitions;
 import com.stefan.automation.managers.DriverManager;
 import com.stefan.automation.managers.FakeDataManager;
 import com.stefan.automation.pageobjects.HomePage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
@@ -77,4 +78,28 @@ public class HomePageSteps {
         homePage.userNavigatesToCartPage();
     }
 
+    @When("User navigates to Dress category page")
+    public void userNavigatesToDressCategoryPage(){
+        homePage.userNavigatesToDressCategoryPage();
+    }
+
+    @When("User navigates to Tshirts category page")
+    public void userNavigatesToTshirtsCategoryPage(){
+        homePage.userNavigatesToTshirtsCategoryPage();
+    }
+
+    @And("User adds to cart a recommended product")
+    public void userAddsToCartRecommendedProduct(){
+        homePage.userAddsToCartRecommendedProduct();
+    }
+
+    @And("User clicks the scroll up arrow")
+    public void userClicksTheScrollUpArrow(){
+        homePage.userClicksTheScrollUpArrow();
+    }
+
+    @Then("Page is scrolled up")
+    public void pageIsScrolledUp(){
+        homePage.pageIsScrolledUp();
+    }
 }

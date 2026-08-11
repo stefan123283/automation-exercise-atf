@@ -6,7 +6,7 @@ Feature: User authentification
 
   @ui
   @authentification
-  @positive
+  @loginUserWithCorrectEmailAndPassword
   Scenario: Login user with correct email and password
     Then Home page is visible
     When User navigates to Login page
@@ -22,7 +22,7 @@ Feature: User authentification
 
   @ui
   @authentification
-  @negative
+  @loginUserWithIncorrectEmailAndPassword
   Scenario: Login user with incorrect email and password
     Then Home page is visible
     When User navigates to Login page

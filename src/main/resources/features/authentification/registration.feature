@@ -5,8 +5,8 @@ Feature: User registration
     And User data is generated
 
   @ui
-  @registration
-  @positive
+  @authentification
+  @registerUser
   Scenario: Register user
     When User navigates to Login page
     And User completes signup form
@@ -16,8 +16,8 @@ Feature: User registration
     Then Account is deleted successfully
 
   @ui
-  @registration
-  @negative
+  @authentification
+  @registerUserWithExistingEmail
   Scenario: Register user with existing email
     When User navigates to Login page
     And User completes signup form

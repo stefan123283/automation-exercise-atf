@@ -18,9 +18,6 @@ public abstract class Page {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[contains(text(), 'Home')]")
-    WebElement homeLink;
-
     @FindBy(xpath = "//a[contains(text(), 'Products')]")
     WebElement productsLink;
 
@@ -72,22 +69,6 @@ public abstract class Page {
         Log.debug("\"" + elementName + "\" is clicked");
     }
 
-    protected void sendKeysToElement(WebElement webElement, String elementName, String keys) {
-        ExplicitWaitManager.waitUntilElementIsVisible(webElement, elementName);
-        ScrollManager.scrollToElement(webElement, elementName);
-        if (webElement.getTagName().equals("input")) {
-            Log.debug("Clearing the value of the \"" + elementName + "\" element");
-            webElement.clear();
-        }
-        webElement.sendKeys(keys);
-        Log.debug("Value is entered in the \"" + elementName + "\"");
-    }
-
-    protected void pressEnter(WebElement webElement, String elementName) {
-        webElement.sendKeys("\\uE007");
-        Log.debug("Pressed ENTER on \"" + elementName + "\"");
-    }
-
     protected void switchToFrame(WebElement frame, String frameName) {
         driver.switchTo().frame(frame);
         Log.debug("Switched to \"" + frameName + "\" context");
@@ -112,14 +93,21 @@ public abstract class Page {
     public void closePopUpAddIfPresent() {
         List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
         Log.debug("The size of the ads frame list: " + adsFrameList.size());
-        if (!adsFrameList.isEmpty() && adsFrameList.getLast().isDisplayed()) {
-            switchToFrame(adsFrameList.getLast(), "Advertisement frame");
+        for (int i = 0; i < adsFrameList.size(); i++) {
+            switchToFrame(adsFrameList.get(i), "Advertisement frame " + (i + 1));
             List<WebElement> closeButtonsList = driver.findElements(By.xpath("//div[text()='Close']"));
-            if (!closeButtonsList.isEmpty() && closeButtonsList.getFirst().isDisplayed()) {
-                clickElement(closeButtonsList.getFirst(), "[Close ad] button");
+            Log.debug("The size of the close buttons list: " + closeButtonsList.size());
+            if (!closeButtonsList.isEmpty()) {
+                try {
+                    clickElement(closeButtonsList.getFirst(), "[Close ad] button");
+                    break;
+                } catch (IllegalStateException e) {
+                    Log.debug("The [Close ad] button is actually not visible");
+                } finally {
+                    switchToDefaultContent();
+                }
             }
             switchToDefaultContent();
         }
     }
-
 }
