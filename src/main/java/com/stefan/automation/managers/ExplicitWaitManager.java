@@ -23,7 +23,6 @@ public final class ExplicitWaitManager {
         try {
             createWait().until(ExpectedConditions.visibilityOf(webElement));
         } catch (TimeoutException e) {
-            Log.error("\"" + elementName + "\" is not visible");
             throw new IllegalStateException("\"" + elementName + "\" is not visible", e);
         }
         Log.debug("\"" + elementName + "\" is visible");
@@ -46,7 +45,6 @@ public final class ExplicitWaitManager {
         try {
             createWait().until(ExpectedConditions.elementToBeClickable(webElement));
         } catch (TimeoutException e) {
-            Log.error("\"" + elementName + "\" is not clickable");
             throw new IllegalStateException("\"" + elementName + "\" is not clickable", e);
         }
         Log.debug("\"" + elementName + "\" is clickable");
@@ -57,7 +55,6 @@ public final class ExplicitWaitManager {
         try {
             createWait().until(ExpectedConditions.alertIsPresent());
         } catch (TimeoutException e) {
-            Log.error("JavaScript alert is not visible");
             throw new IllegalStateException("JavaScript alert is not visible", e);
         }
         Log.debug("JavaScript alert is visible");

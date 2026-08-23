@@ -70,13 +70,13 @@ public abstract class Page {
     }
 
     protected void switchToFrame(WebElement frame, String frameName) {
+        Log.debug("Switching to \"" + frameName + "\" context");
         driver.switchTo().frame(frame);
-        Log.debug("Switched to \"" + frameName + "\" context");
     }
 
     protected void switchToDefaultContent() {
+        Log.debug("Switching back to the main page context");
         driver.switchTo().defaultContent();
-        Log.debug("Switched back to the main page context");
     }
 
     protected void acceptAlert() {
@@ -91,10 +91,16 @@ public abstract class Page {
     }
 
     public void closePopUpAddIfPresent() {
-        List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
-        Log.debug("The size of the ads frame list: " + adsFrameList.size());
-        for (int i = 0; i < adsFrameList.size(); i++) {
-            switchToFrame(adsFrameList.get(i), "Advertisement frame " + (i + 1));
+        int initialAdsFrameCount = driver.findElements(By.xpath("//iframe[@title='Advertisement']")).size();
+        Log.debug("Initial ads frames displayed: " + initialAdsFrameCount);
+        for (int i = 0; i < initialAdsFrameCount; i++) {
+            List<WebElement> currentAdsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
+            int currentAdsFrameCount = currentAdsFrameList.size();
+            Log.debug("Current ads frames displayed: " + currentAdsFrameCount);
+            if (i >= currentAdsFrameCount) {
+                break;
+            }
+            switchToFrame(currentAdsFrameList.get(i), "Advertisement frame " + (i + 1));
             List<WebElement> closeButtonsList = driver.findElements(By.xpath("//div[text()='Close']"));
             Log.debug("The size of the close buttons list: " + closeButtonsList.size());
             if (!closeButtonsList.isEmpty()) {

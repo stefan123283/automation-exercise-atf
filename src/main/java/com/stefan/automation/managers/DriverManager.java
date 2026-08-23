@@ -47,10 +47,7 @@ public final class DriverManager {
                 }
                 driver = new FirefoxDriver(options);
             }
-            default -> {
-                Log.error("Invalid browser name specified!");
-                throw new IllegalArgumentException("Invalid browser name specified!");
-            }
+            default -> throw new IllegalArgumentException("Invalid browser name specified!");
         }
     }
 

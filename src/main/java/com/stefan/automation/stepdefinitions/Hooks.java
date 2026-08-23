@@ -28,32 +28,41 @@ public class Hooks {
     @Before
     public void beforeEachTest(Scenario scenario) {
         startTime = Instant.now();
-        extentTest = ExtentReportManager.createTest("Test case: " + scenario.getName());
-        Log.info("Starting test case: " + scenario.getName());
-        driver = DriverManager.getInstance().getDriver();
-        if (FULL_SCREEN_MODE.equals("enabled")) {
-            Log.info("Starting the browser in full screen mode");
-            driver.manage().window().maximize();
+        String scenarioName = scenario.getName();
+        extentTest = ExtentReportManager.createTest("Test case: " + scenarioName);
+        Log.info("Starting test case: " + scenarioName);
+        if (!ApiClient.isApiTest(scenario)) {
+            driver = DriverManager.getInstance().getDriver();
+            if (FULL_SCREEN_MODE.equals("enabled")) {
+                Log.info("Starting the browser in full screen mode");
+                driver.manage().window().maximize();
+            }
+            Log.info("Waiting page to load completely (timeout: " + PAGE_LOAD_WAIT + " seconds)");
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(PAGE_LOAD_WAIT));
         }
-        Log.info("Waiting page to load completely (timeout: " + PAGE_LOAD_WAIT + " seconds)");
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(PAGE_LOAD_WAIT));
     }
 
     @After
     public void afterEachTest(Scenario scenario) {
-
         Duration duration = Duration.between(startTime, Instant.now());
+        String scenarioName = scenario.getName();
 
         if (scenario.isFailed()) {
-            String screenshotPath = ExtentReportManager.captureScreenshot(driver, scenario.getName());
-            extentTest.fail("The test failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-            Log.error("Screenshot saved to: " + screenshotPath);
-            Log.info("Test case failed: " + scenario.getName() + " (Duration: " + duration.toSeconds() + "s)");
+            if (!(ApiClient.isApiTest(scenario))) {
+                String screenshotPath = ExtentReportManager.captureScreenshot(driver, scenarioName);
+                extentTest.fail("The test has failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                Log.error("Screenshot saved to: " + screenshotPath);
+            } else {
+                extentTest.fail("The test has failed");
+            }
+            Log.info("Test case failed: " + scenarioName + " (Duration: " + duration.toSeconds() + "s)");
         } else {
-            Log.info("Test case completed successfully: " + scenario.getName() + " (Duration: " + duration.toSeconds() + "s)");
+            Log.info("Test case completed successfully: " + scenarioName + " (Duration: " + duration.toSeconds() + "s)");
         }
 
-        DriverManager.getInstance().quitTheDriver();
+        if (!(ApiClient.isApiTest(scenario))) {
+            DriverManager.getInstance().quitTheDriver();
+        }
     }
 
     @AfterAll

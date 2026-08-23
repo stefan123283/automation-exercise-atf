@@ -20,8 +20,7 @@ public final class ConfigReaderManager {
             properties.load(fileInputStream);
             fileInputStream.close();
         } catch (IOException e) {
-            Log.error("The \"" + CONFIG_FILE_PATH + "\" file was not found or it can't be opened");
-            throw new RuntimeException("The \"" + CONFIG_FILE_PATH + "\" file was not found or it can't be opened", e);
+            throw new IllegalStateException("The \"" + CONFIG_FILE_PATH + "\" file was not found or it can't be opened", e);
         }
         Log.info("Test configuration loaded successfully");
     }
@@ -32,18 +31,15 @@ public final class ConfigReaderManager {
         }
 
         if (property == null || property.isBlank()) {
-            Log.error("Property can't be null or empty!");
             throw new IllegalArgumentException("Property can't be null or empty!");
         }
 
         String propertyValue = properties.getProperty(property);
 
         if (propertyValue == null) {
-            Log.error("Property \"" + property + "\" was not found in the test configuration file");
-            throw new RuntimeException("Property \"" + property + "\" was not found in the test configuration file");
+            throw new IllegalStateException("Property \"" + property + "\" was not found in the test configuration file");
         } else if (propertyValue.isBlank()) {
-            Log.error("Property \"" + property + "\" is empty");
-            throw new IllegalArgumentException("Property \"" + property + "\" is empty");
+            throw new IllegalStateException("Property \"" + property + "\" is empty");
         }
 
         return propertyValue;
