@@ -12,6 +12,7 @@ public final class DriverManager {
 
     private static final String BROWSER_TYPE = ConfigReaderManager.getProperty("browserType");
     private static final String INCOGNITO_MODE = ConfigReaderManager.getProperty("incognitoMode");
+    private static final String HEADLESS_MODE = ConfigReaderManager.getProperty("headlessMode");
     private static DriverManager instance;
     private WebDriver driver;
 
@@ -25,6 +26,12 @@ public final class DriverManager {
                 } else {
                     Log.info("Initiating Chrome driver instance with incognito mode disabled");
                 }
+                if (HEADLESS_MODE.equals("enabled")) {
+                    options.addArguments("--headless");
+                    Log.info("Initiating Chrome driver instance with headless mode enabled");
+                } else {
+                    Log.info("Initiating Chrome driver instance with headless mode disabled");
+                }
                 driver = new ChromeDriver(options);
             }
             case "EDGE" -> {
@@ -35,6 +42,12 @@ public final class DriverManager {
                 } else {
                     Log.info("Initiating Edge driver instance with incognito mode disabled");
                 }
+                if (HEADLESS_MODE.equals("enabled")) {
+                    options.addArguments("--headless");
+                    Log.info("Initiating Edge driver instance with headless mode enabled");
+                } else {
+                    Log.info("Initiating Edge driver instance with headless mode disabled");
+                }
                 driver = new EdgeDriver(options);
             }
             case "FIREFOX" -> {
@@ -44,6 +57,12 @@ public final class DriverManager {
                     Log.info("Initiating FireFox driver instance with incognito mode enabled");
                 } else {
                     Log.info("Initiating FireFox driver instance with incognito mode disabled");
+                }
+                if (HEADLESS_MODE.equals("enabled")) {
+                    options.addArguments("--headless");
+                    Log.info("Initiating FireFox driver instance with headless mode enabled");
+                } else {
+                    Log.info("Initiating FireFox driver instance with headless mode disabled");
                 }
                 driver = new FirefoxDriver(options);
             }
