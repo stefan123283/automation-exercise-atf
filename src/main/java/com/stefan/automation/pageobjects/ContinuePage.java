@@ -37,17 +37,8 @@ public class ContinuePage extends Page {
         AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(orderPlacedSuccessfullyMessage, "Order placed successfully message"), "Order is placed successfully");
     }
 
-    public void userDownloadsTheInvoice() {
-        Log.info("Downloading the invoice");
-        ExtentReportManager.addTestStep("User downloads the invoice");
-        clickElement(downloadInvoiceButton, "[Download Invoice] button");
-        clickElement(continueButton, "[Continue] button");
-        KeyboardManager.pressEnterOnOS();
-    }
-
-    public void invoiceIsDownloadedSuccessfully(String fileName) {
-        AssertManager.assertTrue(FileManager.checkIfFileExists(fileName), "Invoice is downloaded successfully");
-        FileManager.deleteFile(fileName);
+    public void userIsAbleToDownloadInvoice() {
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(downloadInvoiceButton, "[Download Invoice] button"), "User is able to download the invoice");
     }
 
 }

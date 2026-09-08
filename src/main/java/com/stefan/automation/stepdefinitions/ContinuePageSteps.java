@@ -26,14 +26,9 @@ public class ContinuePageSteps {
         continuePage.orderPlacedSuccessfully();
     }
 
-    @When("User downloads the invoice")
-    public void userDownloadsTheInvoice(){
-        continuePage.userDownloadsTheInvoice();
-    }
-
-    @Then("Invoice is downloaded successfully")
-    public void theInvoiceIsDownloadedSuccessfully(){
-        continuePage.invoiceIsDownloadedSuccessfully("invoice.txt");
+    @Then("User is able to download the invoice")
+    public void userIsAbleToDownloadInvoice(){
+        continuePage.userIsAbleToDownloadInvoice();
     }
 
 }

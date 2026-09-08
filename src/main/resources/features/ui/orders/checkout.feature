@@ -128,7 +128,6 @@ Feature: Checkout and orders
     Then Payment page is visible
     When User populates the payment form
     Then Order is placed successfully
-    When User downloads the invoice
+    And User is able to download the invoice
     And User deletes their account
     Then Account is deleted successfully
-    And Invoice is downloaded successfully

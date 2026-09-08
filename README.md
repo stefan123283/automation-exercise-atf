@@ -107,6 +107,14 @@ Tests are executed through the `CucumberTestRunner` class by modifying the `@Con
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@loginUserWithCorrectEmailAndPassword")
 ```
 
+### Running via Maven
+
+Tests can also be executed using Maven from the project root. For a full test run, use:
+```bash
+mvn clean test
+```
+
+
 ### Tag Hierarchy
 
 Each feature file is organized with three levels of tags for flexible targeting:
@@ -143,6 +151,11 @@ This framework generates comprehensive test reports:
 - Real-time test execution logs via Log4j 2
 - Configurable log levels in `log4j2.xml`
 - Helps with debugging and audit trails
+
+
+## 🚦 Continuous Integration (GitHub Actions)
+
+This repository is configured with GitHub Actions to run the test suite automatically on pushes and pull requests. Workflow files live under `.github/workflows/` and are set up to execute the Maven test command (e.g., `mvn clean test`) to validate changes. Check the Actions tab in the GitHub repository to view run history, logs, and artifacts.
 
 ## 🧪 Test Coverage Summary
 
