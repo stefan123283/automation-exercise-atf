@@ -13,8 +13,8 @@ public class HomePage extends Page {
         super(driver);
     }
 
-    @FindBy(xpath = "//h2[text()='Full-Fledged practice website for Automation Engineers']")
-    WebElement homePageHeading;
+    @FindBy(xpath = "//a[contains(., 'Home')]")
+    WebElement homePageLink;
 
     @FindBy(xpath = "//a[contains(.,'Women')]")
     WebElement womenCategory;
@@ -41,7 +41,7 @@ public class HomePage extends Page {
     }
 
     public void homePageIsVisible() {
-        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(homePageHeading, "Home page heading"), "Home page is visible");
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(homePageLink, "Home page link"), "Home page is visible");
     }
 
     public void userNavigatesToLoginPage() {

@@ -13,7 +13,7 @@ public final class ScrollManager {
     }
 
     public static void scrollToBottomOfPage() {
-        Log.debug("Scrolling to bottom of the page");
+        Log.info("User scrolls to bottom of the page");
         getJavaScriptExecutor().executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
 
@@ -23,7 +23,7 @@ public final class ScrollManager {
     }
 
     public static void scrollToTopOfPage() {
-        Log.debug("Scrolling to top of the page");
+        Log.info("User scrolls to top of the page");
         getJavaScriptExecutor().executeScript("window.scrollTo(0, 0);");
     }
 }

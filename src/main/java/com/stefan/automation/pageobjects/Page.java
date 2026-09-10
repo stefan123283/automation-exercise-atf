@@ -91,16 +91,20 @@ public abstract class Page {
     }
 
     public void closePopUpAddIfPresent() {
-        int initialAdsFrameCount = driver.findElements(By.xpath("//iframe[@title='Advertisement']")).size();
-        Log.debug("Initial ads frames displayed: " + initialAdsFrameCount);
-        for (int i = 0; i < initialAdsFrameCount; i++) {
-            List<WebElement> currentAdsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
-            int currentAdsFrameCount = currentAdsFrameList.size();
-            Log.debug("Current ads frames displayed: " + currentAdsFrameCount);
-            if (i >= currentAdsFrameCount) {
-                break;
+        List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
+        int adsFrameCount = adsFrameList.size();
+        Log.debug("Current ads frames displayed: " + adsFrameCount);
+        for (int i = 0; i < adsFrameCount; i++) {
+            try {
+                switchToFrame(adsFrameList.get(i), "Advertisement frame " + (i + 1));
+            } catch (StaleElementReferenceException e) {
+                Log.debug("The reference to the advertisement frame " + (i + 1) + " is stale. Searching again for any add frames");
+                adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
+                adsFrameCount = adsFrameList.size();
+                Log.debug("Current ads frames displayed: " + adsFrameCount);
+                i = -1;
+                continue;
             }
-            switchToFrame(currentAdsFrameList.get(i), "Advertisement frame " + (i + 1));
             List<WebElement> closeButtonsList = driver.findElements(By.xpath("//div[text()='Close']"));
             Log.debug("The size of the close buttons list: " + closeButtonsList.size());
             if (!closeButtonsList.isEmpty()) {

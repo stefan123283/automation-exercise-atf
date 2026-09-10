@@ -110,6 +110,7 @@ public class AllProductsPage extends Page {
         Log.info("Navigating to H&M brand page");
         ExtentReportManager.addTestStep("User navigates to H&M brand page");
         clickElement(hAndMBrand, "H&M brand link");
+        closePopUpAddIfPresent();
     }
 
     public void hAndMBrandPageIsVisible() {
