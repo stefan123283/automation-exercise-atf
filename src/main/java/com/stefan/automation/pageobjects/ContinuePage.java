@@ -26,7 +26,6 @@ public class ContinuePage extends Page {
     public void accountIsCreatedSuccessfully() {
         AssertManager.assertTrue(ExplicitWaitManager.checkIfElementIsVisible(accountCreatedHeading, "Account Created heading"), "Account created successfully");
         clickElement(continueButton, "[Continue] button");
-        closePopUpAddIfPresent();
     }
 
     public void accountIsDeletedSuccessfully() {

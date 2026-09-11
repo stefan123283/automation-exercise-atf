@@ -39,7 +39,8 @@ public class ContactUsPage extends Page {
         KeyboardManager.enterValueIntoElement(emailTextBox, "Email text box", email);
         KeyboardManager.enterValueIntoElement(subjectTextBox, "Subject text box", subject);
         KeyboardManager.enterValueIntoElement(messageTextBox, "Message text box", message);
-        clickElement(submitButton, "[Submit] button");
+        ExplicitWaitManager.waitUntilElementIsClickable(submitButton, "[Submit] button");
+        submitButton.click();
         acceptAlert();
     }
 
@@ -51,6 +52,5 @@ public class ContactUsPage extends Page {
         Log.info("Navigating to Home page");
         ExtentReportManager.addTestStep("User navigates to Home page");
         clickElement(homeButton, "[<< Home] button");
-        closePopUpAddIfPresent();
     }
 }

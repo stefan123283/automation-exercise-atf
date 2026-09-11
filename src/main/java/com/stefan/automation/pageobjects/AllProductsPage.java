@@ -63,7 +63,6 @@ public class AllProductsPage extends Page {
     public void clickOnViewProductButtonOfFirstProduct() {
         ExtentReportManager.addTestStep("User clicks on [View Product] button of first product");
         clickElement(viewProductButton, "[View Product] button");
-        closePopUpAddIfPresent();
     }
 
     public void userSearchASpecificProduct() {
@@ -110,7 +109,6 @@ public class AllProductsPage extends Page {
         Log.info("Navigating to H&M brand page");
         ExtentReportManager.addTestStep("User navigates to H&M brand page");
         clickElement(hAndMBrand, "H&M brand link");
-        closePopUpAddIfPresent();
     }
 
     public void hAndMBrandPageIsVisible() {

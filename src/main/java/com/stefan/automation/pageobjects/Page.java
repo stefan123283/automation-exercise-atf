@@ -67,6 +67,7 @@ public abstract class Page {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", webElement);
         }
         Log.debug("\"" + elementName + "\" is clicked");
+        closePopUpAddIfPresent();
     }
 
     protected void switchToFrame(WebElement frame, String frameName) {
@@ -92,7 +93,7 @@ public abstract class Page {
         for (int i = 0; i < adsFrameCount; i++) {
             try {
                 switchToFrame(adsFrameList.get(i), "Advertisement frame " + (i + 1));
-            } catch (StaleElementReferenceException e) {
+            } catch (RuntimeException e) {
                 Log.debug("The reference to the advertisement frame " + (i + 1) + " is stale. Searching again for any add frames");
                 adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
                 adsFrameCount = adsFrameList.size();
@@ -104,9 +105,9 @@ public abstract class Page {
             Log.debug("The size of the close buttons list: " + closeButtonsList.size());
             if (!closeButtonsList.isEmpty()) {
                 try {
-                    clickElement(closeButtonsList.getFirst(), "[Close ad] button");
+                    closeButtonsList.getFirst().click();
                     break;
-                } catch (IllegalStateException e) {
+                } catch (RuntimeException e) {
                     Log.debug("The [Close ad] button is actually not visible");
                 } finally {
                     switchToDefaultContent();

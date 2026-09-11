@@ -54,7 +54,6 @@ public class HomePage extends Page {
         Log.info("Deleting created account");
         ExtentReportManager.addTestStep("User deletes their account");
         clickElement(deleteAccountButton, "[Delete] button");
-        closePopUpAddIfPresent();
     }
 
     public void userLogsOut() {
@@ -77,14 +76,12 @@ public class HomePage extends Page {
         Log.info("Navigating to Test Cases page");
         ExtentReportManager.addTestStep("User navigates to Test Cases page");
         clickElement(testCasesButton, "[Test Cases] button");
-        closePopUpAddIfPresent();
     }
 
     public void userNavigatesToAllProductsPage() {
         Log.info("Navigating to All Products page");
         ExtentReportManager.addTestStep("User navigates to All Products page");
         clickElement(productsLink, "[Products] button");
-        closePopUpAddIfPresent();
     }
 
     public void subscriptionSectionIsVisible() {
@@ -106,14 +103,12 @@ public class HomePage extends Page {
         Log.info("Navigating to Cart page");
         ExtentReportManager.addTestStep("User navigates to Cart page");
         clickElement(cartLink, "[Cart] button");
-        closePopUpAddIfPresent();
     }
 
     public void userNavigatesToDressCategoryPage() {
         Log.info("Navigating to Dress category page");
         ExtentReportManager.addTestStep("User navigates to Dress category page");
         clickElement(womenCategory, "Women category link");
-        closePopUpAddIfPresent();
         clickElement(dressSubcategory, "Dress subcategory link");
     }
 
@@ -121,7 +116,6 @@ public class HomePage extends Page {
         Log.info("Navigating to Tshirts category page");
         ExtentReportManager.addTestStep("User navigates to Tshirts category page");
         clickElement(menCategory, "Men category link");
-        closePopUpAddIfPresent();
         clickElement(tShirtsSubcategory, "Tshirts subcategory link");
     }
 
@@ -135,7 +129,6 @@ public class HomePage extends Page {
         Log.info("Clicking scroll up arrow");
         ExtentReportManager.addTestStep("User clicks the scroll up arrow");
         clickElement(scrollUpArrow, "Scroll up arrow");
-        closePopUpAddIfPresent();
         clickElement(scrollUpArrow, "Scroll up arrow");
     }
 
