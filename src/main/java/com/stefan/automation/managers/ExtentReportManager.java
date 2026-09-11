@@ -42,16 +42,9 @@ public final class ExtentReportManager {
         extentTest.info(testStep);
     }
 
-    public static String captureScreenshot(WebDriver driver, String screenshotName) {
-        try {
-            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/reports/screenshots/" + screenshotName + ".png"));
-            return "screenshots/" + screenshotName + ".png";
-        } catch (IOException e) {
-            Log.warn("Screenshoot was not saved!");
-            return null;
-        }
+    public static String captureScreenshot(WebDriver driver, String screenshotName) throws IOException {
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/reports/screenshots/" + screenshotName + ".png"));
+        return "screenshots/" + screenshotName + ".png";
     }
-
-
 }

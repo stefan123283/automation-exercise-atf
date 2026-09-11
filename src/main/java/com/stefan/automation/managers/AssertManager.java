@@ -8,9 +8,9 @@ public final class AssertManager {
     }
 
     public static void assertTrue(boolean condition, String message) {
-        Assertions.assertTrue(condition, message);
         ExtentReportManager.addTestStep(message);
         Log.info(message);
+        Assertions.assertTrue(condition, message);
     }
 
 }

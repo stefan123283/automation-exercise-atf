@@ -72,4 +72,16 @@ public final class ExplicitWaitManager {
         }
     }
 
+    public static boolean checkIfElementContainsSpecificText(WebElement webElement, String elementName, String expectedText) {
+        Log.debug("Checking if " + elementName + " contains the \"" + expectedText + " text (timeout : " + EXPLICIT_WAIT + "s)");
+        try {
+            createWait().until(ExpectedConditions.textToBePresentInElement(webElement, expectedText));
+            Log.debug(elementName + " contains the \"" + expectedText + " text");
+            return true;
+        } catch (TimeoutException e) {
+            Log.debug(elementName + " doesn't contains the \"" + expectedText + " text");
+            return false;
+        }
+    }
+
 }

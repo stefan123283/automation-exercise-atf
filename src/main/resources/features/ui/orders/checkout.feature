@@ -7,7 +7,7 @@ Feature: Checkout and orders
   @ui
   @orders
   @placeOrderRegisterWhileCheckout
-  Scenario: Place order: register while checkout
+  Scenario: Place order - register while checkout
     Then Home page is visible
     When User navigates to All Products page
     Then All Products page is visible
@@ -35,7 +35,7 @@ Feature: Checkout and orders
   @ui
   @orders
   @placeOrderRegisterBeforeCheckout
-  Scenario: Place order: register before checkout
+  Scenario: Place order - register before checkout
     Then Home page is visible
     When User navigates to Login page
     Then Login page is displayed
@@ -59,7 +59,7 @@ Feature: Checkout and orders
   @ui
   @orders
   @placeOrderLoginBeforeCheckout
-  Scenario: Place order: login before checkout
+  Scenario: Place order - login before checkout
     Then Home page is visible
     When User navigates to Login page
     Then Login page is displayed

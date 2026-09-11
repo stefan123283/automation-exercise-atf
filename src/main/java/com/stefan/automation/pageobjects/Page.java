@@ -85,11 +85,6 @@ public abstract class Page {
         driver.switchTo().alert().accept();
     }
 
-    protected String getElementAttributeValue(WebElement webElement, String elementName, String attributeName) {
-        Log.debug("The value of the attribute \"" + attributeName + "\" of the \"" + elementName + "\" element is: \"" + webElement.getAttribute(attributeName) + "\"");
-        return webElement.getAttribute(attributeName);
-    }
-
     public void closePopUpAddIfPresent() {
         List<WebElement> adsFrameList = driver.findElements(By.xpath("//iframe[@title='Advertisement']"));
         int adsFrameCount = adsFrameList.size();

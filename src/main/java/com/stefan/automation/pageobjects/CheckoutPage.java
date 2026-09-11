@@ -39,30 +39,29 @@ public class CheckoutPage extends Page {
 
     public void theDeliveryAddressInformationIsCorrect(String firstName, String lastName, String company, String address, String state,
                                                        String city, String zipCode, String mobileNumber) {
-        String actualDeliveryAddress = getElementAttributeValue(deliveryAddressSquare, "Delivering address square", "innerText");
-        AssertManager.assertTrue(actualDeliveryAddress.contains(firstName)
-                        && (actualDeliveryAddress.contains(lastName))
-                        && (actualDeliveryAddress.contains(company))
-                        && (actualDeliveryAddress.contains(address))
-                        && (actualDeliveryAddress.contains(state))
-                        && (actualDeliveryAddress.contains(city))
-                        && (actualDeliveryAddress.contains(zipCode))
-                        && (actualDeliveryAddress.contains(mobileNumber))
+        AssertManager.assertTrue(
+                ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", firstName)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", lastName)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", company)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", address)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", state)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", city)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", zipCode)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(deliveryAddressSquare, "Delivering address square", mobileNumber)
                 , "The delivery address information is correct");
     }
 
     public void theBillingAddressInformationIsCorrect(String firstName, String lastName, String company, String address, String state,
                                                       String city, String zipCode, String mobileNumber) {
-        String actualBillingAddress = getElementAttributeValue(billingAddressSquare, "Billing address square", "innerText");
-        ;
-        AssertManager.assertTrue(actualBillingAddress.contains(firstName)
-                        && (actualBillingAddress.contains(lastName))
-                        && (actualBillingAddress.contains(company))
-                        && (actualBillingAddress.contains(address))
-                        && (actualBillingAddress.contains(state))
-                        && (actualBillingAddress.contains(city))
-                        && (actualBillingAddress.contains(zipCode))
-                        && (actualBillingAddress.contains(mobileNumber))
+        AssertManager.assertTrue(
+                ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", firstName)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", lastName)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", company)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", address)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", state)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", city)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", zipCode)
+                        && ExplicitWaitManager.checkIfElementContainsSpecificText(billingAddressSquare, "Billing address square", mobileNumber)
                 , "The billing address information is correct");
     }
 

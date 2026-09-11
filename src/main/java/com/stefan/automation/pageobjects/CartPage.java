@@ -46,7 +46,7 @@ public class CartPage extends Page {
     }
 
     public void productIsDisplayedWithExactQuantity(String quantity) {
-        AssertManager.assertTrue((getElementAttributeValue(productQuantityBox, "First product quantity box", "innerText")).equals(quantity), "Product is displayed in Cart page with " + quantity + " quantity");
+        AssertManager.assertTrue(ExplicitWaitManager.checkIfElementContainsSpecificText(productQuantityBox, "First product quantity box", quantity), "Product is displayed in Cart page with " + quantity + " quantity");
     }
 
     public void userClickOnProceedToCheckoutButton() {

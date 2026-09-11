@@ -2,6 +2,7 @@ package com.stefan.automation.managers;
 
 import com.github.javafaker.Faker;
 import com.stefan.automation.models.User;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public final class FakeDataManager {
 
@@ -35,7 +36,7 @@ public final class FakeDataManager {
     }
 
     public static String generateRandomEmail() {
-        return faker.internet().emailAddress();
+        return RandomStringUtils.randomAlphanumeric(5) + "@" + RandomStringUtils.randomAlphanumeric(5);
     }
 
     public static String generateRandomPassword() {

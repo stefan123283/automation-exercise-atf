@@ -7,6 +7,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -49,9 +50,16 @@ public class Hooks {
 
         if (scenario.isFailed()) {
             if (!(ApiClient.isApiTest(scenario))) {
-                String screenshotPath = ExtentReportManager.captureScreenshot(driver, scenarioName);
-                extentTest.fail("The test has failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-                Log.error("Screenshot saved to: " + screenshotPath);
+                try {
+                    String screenshotPath = ExtentReportManager.captureScreenshot(driver, scenarioName);
+                    extentTest.fail("The test has failed. Check the attached screenshot:", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                    Log.error("Screenshot saved to: " + screenshotPath);
+                } catch (IOException e) {
+                    Log.warn("Screenshoot was not saved! Please check if the name of the failed test doesn't contain invalid characters");
+                    extentTest.fail("The test has failed");
+                } finally {
+                    DriverManager.getInstance().quitTheDriver();
+                }
             } else {
                 extentTest.fail("The test has failed");
             }
@@ -59,7 +67,6 @@ public class Hooks {
         } else {
             Log.info("Test case completed successfully: " + scenarioName + " (Duration: " + duration.toSeconds() + "s)");
         }
-
         if (!(ApiClient.isApiTest(scenario))) {
             DriverManager.getInstance().quitTheDriver();
         }
